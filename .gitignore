@@ -1,3 +1,15 @@
+# Misc
+.DS_Store
+.keep
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# Rider
+.idea
+
 # Logs
 logs
 *.log
@@ -121,6 +133,9 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Visual Studio
+.vs
 
 # yarn v2
 .yarn/cache

@@ -1,0 +1,22 @@
+tasks:
+  - name: Gitpod Task
+    before: |
+      echo "npm build in $(pwd)"
+      npm install
+      echo "npm install done."
+    
+    command: |
+      # Run the application based on specified $path.
+      echo "Starting application in $(pwd)"
+      npm run dev
+
+# exposed ports
+ports:
+  - port: 8080
+    onOpen: open-preview
+    visibility: public
+
+vscode:
+  extensions:
+    - esbenp.prettier-vscode
+    - dbaeumer.vscode-eslint
