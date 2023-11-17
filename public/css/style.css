@@ -1,0 +1,105 @@
+:root {
+    --adyen-dark-color: #00112c;
+    --adyen-green-color: #0abf53;
+    --yellow-color: #f1c40f;
+    --red-color: #e74c3c;
+    --white-color: #f0f0f0;
+    --gray-color: #7e8a8f;
+    --gray-accent-color: #48525a;
+    --gray-highlight-color: #cccccc;
+    --terminal-border-radius: 12px;
+}
+
+html {
+    font-family: "Fakt", sans-serif;
+    font-size: 24px;
+    color: var(--white-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(90deg, var(--adyen-dark-color), #333333, var(--adyen-green-color));
+    height: 100%;
+    overflow: hidden;
+}
+
+.terminal {
+    border-radius: var(--terminal-border-radius);
+    box-shadow: 0 20px 24px rgba(0, 0, 0, 0.8); 
+    transform: perspective(1920px) rotateX(10deg); /* Apply the perspective effect */
+    padding: 24px;
+}
+
+.terminal-top {
+    border-radius: var(--terminal-border-radius) var(--terminal-border-radius) 0 0;
+    background: var(--gray-color);
+    padding: 28px 20px;
+    transform: translateY(3px) perspective(1080px) rotateX(-10deg) scale(1.04); /* Apply the perspective effect on the screen */
+}
+
+.terminal-bottom {
+    border-radius: 0 0 var(--terminal-border-radius) var(--terminal-border-radius);
+    background: var(--gray-highlight-color);
+    padding: 28px;
+}
+
+.screen {;
+    font-size: 20px;
+    background-color: var(--white-color);
+    color: var(--adyen-dark-color);
+    border-radius: 4px;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--gray-hightlight-color);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    user-select: none;
+}
+
+.digits {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.digit-button,
+.action-button {
+    padding: 16px 24px;
+    font-size: 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--adyen-dark-color);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transform: scale(1);
+    filter: brightness(0.9);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+.action-button.yellow {
+    color: white;
+    background-color: var(--yellow-color);
+}
+
+.action-button.red {
+    color: white;
+    background-color: var(--red-color);
+}
+
+.action-button.green {
+    color: white;
+    background-color: var(--adyen-green-color);
+}
+
+.digit-button:hover,
+.action-button:hover {
+    filter: brightness(1.1);
+    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
+    transform: scale(1.03);
+}
+
+.digit-button:active,
+.action-button:active {
+    transform: translateY(2px);
+}
