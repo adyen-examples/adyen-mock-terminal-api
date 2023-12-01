@@ -10,30 +10,48 @@
     --terminal-border-radius: 12px;
 }
 
-html {
+body {
+    /*overflow: hidden;*/
     font-family: "Fakt", sans-serif;
-    font-size: 24px;
-    color: var(--white-color);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(90deg, var(--adyen-dark-color), #333333, var(--adyen-green-color));
-    height: 100%;
-    overflow: hidden;
 }
 
+.main {
+    color: var(--white-color);
+    background: linear-gradient(90deg, var(--adyen-dark-color), #333333, var(--adyen-green-color));
+}
+
+/* Terminal start */
+
 .terminal {
+    display: flex;
+    flex-direction: column;
     border-radius: var(--terminal-border-radius);
-    box-shadow: 0 20px 24px rgba(0, 0, 0, 0.8); 
     transform: perspective(1920px) rotateX(10deg); /* Apply the perspective effect */
     padding: 24px;
 }
 
+.screen {
+    display: grid;
+    font-size: 20px;
+    background-color: var(--white-color);
+    color: var(--adyen-dark-color);
+    border-radius: 4px;
+    padding: 16px;
+    height: 360px;
+    border: 1px solid var(--gray-highlight-color);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    user-select: none;
+}
+
+.screen span {
+    text-align: center;
+}
+
 .terminal-top {
     border-radius: var(--terminal-border-radius) var(--terminal-border-radius) 0 0;
-    background: var(--gray-color);
-    padding: 28px 20px;
-    transform: translateY(3px) perspective(1080px) rotateX(-10deg) scale(1.04); /* Apply the perspective effect on the screen */
+    background: var(--gray-highlight-color);
+    padding: 24px 16px;
+    transform: translateY(3px) perspective(1080px) rotateX(-10deg) scale(1.036); /* Apply the perspective effect */
 }
 
 .terminal-bottom {
@@ -42,30 +60,17 @@ html {
     padding: 28px;
 }
 
-.screen {;
-    font-size: 20px;
-    background-color: var(--white-color);
-    color: var(--adyen-dark-color);
-    border-radius: 4px;
-    height: 360px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid var(--gray-hightlight-color);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    user-select: none;
-}
-
 .digits {
+    font-size: 24px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 8px;
+    user-select: none;
 }
 
 .digit-button,
 .action-button {
     padding: 16px 24px;
-    font-size: 24px;
     border: none;
     border-radius: 5px;
     background-color: var(--adyen-dark-color);
@@ -75,6 +80,7 @@ html {
     transform: scale(1);
     filter: brightness(0.9);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+    outline: none;
 }
 
 .action-button.yellow {
@@ -92,14 +98,92 @@ html {
     background-color: var(--adyen-green-color);
 }
 
+.digit-button:focus,
+.action-button:focus,
 .digit-button:hover,
 .action-button:hover {
     filter: brightness(1.1);
     transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
     transform: scale(1.03);
+    outline: none;
 }
 
 .digit-button:active,
 .action-button:active {
     transform: translateY(2px);
 }
+
+.digit-button:checked {
+    border-style: none;
+}
+
+/* Terminal end */
+
+
+/* Test card start */
+.credit-card {
+    font-size: 12px;
+    color: var(--adyen-dark-color);
+    width: 240px;
+    padding: 20px;
+    margin: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.24s ease-in;
+}
+
+.credit-card:hover {
+    transform: scale(1.02);
+    transition: transform 0.1s ease-out;
+}
+
+.card-number {
+    font-size: 15px;
+    font-weight: bolder;
+    margin-bottom: 15px;
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.card-description {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 8px 0;
+}
+
+.card-holder, .card-cvc, .card-expiry {
+    color: var(--adyen-dark-color);
+}
+/* Test card end*/
+
+
+/* Code highlight start */
+
+code {    
+    display: block;
+    background: #2b303b;
+    border-radius: 8px;
+    overflow: scroll;
+}
+
+.request {
+    padding-top: 8px;
+    font-weight: bold;
+}
+
+.response {
+    font-weight: bold;
+}
+
+.maximize-height {
+    height: 320px;
+}
+
+/* Code highlight end */
+
