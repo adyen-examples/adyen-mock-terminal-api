@@ -187,3 +187,16 @@ code {
 
 /* Code highlight end */
 
+/* Screen pin start */
+
+#screen-pin {
+    text-align: center;
+    border-radius: 8px;
+    font-size: 48px;
+    font-weight: bolder;
+    letter-spacing: 24px;
+    height: 64px;
+    border: 2px solid #ccc;
+}
+
+/* Screen pin end */

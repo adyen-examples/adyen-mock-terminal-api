@@ -1,16 +1,20 @@
-<div id="data">
-    <label for="request-dropdown">Select a request: </label>
-    <select id="request-dropdown">
-        {{#each keys}}
-        <option value="{{this}}">{{capitalizeFirstLetter this}} Request</option>
-        {{/each}}
-    </select>
-    <button id="send-button" onclick="sendRequestButtonOnClick()">Send</button>
-</div>
-
 <div class="row">
     <div class="col-6">
         <div class="row-11">
+            <div id="data">
+                <label for="request-dropdown">Select a request: </label>
+                <select id="request-dropdown">
+                    {{#each keys}}
+                        {{#if (isEqual this "payment")}}
+                            <option value="{{this}}" selected>{{toUpperCase this}} Request</option>
+                        {{else}}
+                            <option value="{{this}}">{{toUpperCase this}} Request</option>
+                        {{/if}}
+                    {{/each}}
+                </select>
+                <button id="send-button" onclick="sendRequestButtonOnClick()">Send</button>
+            </div>
+
             <div class="request">Request:
                 <pre>
                     <code id="json-requests" class="maximize-height language-json"></code>
@@ -30,7 +34,8 @@
     <div class="col-4 terminal">
         <div class="row-6 terminal-top">
             <div class="screen">
-                <span id="screen">Waiting for request . . . </span>
+                <span id="screen">Send a request ...</span>
+                <span id="screen-pin"></span>
             </div>
         </div>
         <div class="row-6 terminal-bottom">
@@ -70,6 +75,7 @@
             </div>
         </div>
 
+        <!--
         <div class="row">
             <div class="credit-card">
                 <div class="card-number">1234 5678 9012 3456</div>
@@ -81,6 +87,7 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
 </div>
 

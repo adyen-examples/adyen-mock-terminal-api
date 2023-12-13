@@ -16,8 +16,11 @@ app.engine("hbs", handlebars({
         defaultLayout: "layout",
         layoutsDir: path.join(__dirname, "src", "views", "layouts"),
         helpers: {
-            capitalizeFirstLetter: function (string) {
+            toUpperCase: function (string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
+            },
+            isEqual: function(stringA, stringB) {
+                return stringA === stringB;
             }
         }
     })
