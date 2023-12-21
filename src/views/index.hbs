@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-6">
-        <div class="row-11">
-            <div id="data">
-                <label for="request-dropdown">Select a request: </label>
+        <div class="row-5">
+            <div id="trigger-request-dropdown">
+                <label for="request-dropdown">Trigger request: </label>
                 <select id="request-dropdown">
                     {{#each keys}}
                         {{#if (isEqual this "payment")}}
@@ -21,7 +21,7 @@
                 </pre> 
             </div>
         </div>
-        <div class="row-11">
+        <div class="row-5">
             <div class="response">Response:
                 <pre>
                     <code id="json-responses" class="maximize-height language-json"></code>
@@ -30,16 +30,17 @@
         </div>
     </div>
     
+    <div class="col-1"></div>
     
     <div class="col-4 terminal">
-        <div class="row-6 terminal-top">
+        <div class="terminal-top">
             <div class="screen">
-                <span id="screen">Send a request ...</span>
-                <span id="screen-pin"></span>
+                <span id="screen">Send a Terminal API request to localhost:3000/sync...</span>
+                <span id="screen-pin" class="hidden"></span>
             </div>
         </div>
-        <div class="row-6 terminal-bottom">
-            <div class="col digits">
+        <div class="terminal-bottom">
+            <div class="digits">
                 <button id="1-button" class="digit-button">1</button>
                 <button id="2-button" class="digit-button">2</button>
                 <button id="3-button" class="digit-button">3</button>
@@ -61,35 +62,11 @@
             </div>
         </div>
     </div>
-    
-    <div class="col-2">
-        <div class="row">
-            <div class="credit-card">
-                <div class="card-number">1234 5678 9012 3456</div>
-                <div class="card-description">Tap Card</div>
-                <div class="card-info">
-                    <div class="card-holder">J. Smith</div>
-                    <div class="card-cvc">737</div>
-                    <div class="card-expiry">Expiry: 02/28</div>
-                </div>
-            </div>
-        </div>
 
-        <!--
-        <div class="row">
-            <div class="credit-card">
-                <div class="card-number">1234 5678 9012 3456</div>
-                <div class="card-description">Insert Card</div>
-                <div class="card-info">
-                    <div class="card-holder">J. Smith</div>
-                    <div class="card-cvc">747</div>
-                    <div class="card-expiry">Expiry: 02/28</div>
-                </div>
-            </div>
-        </div>
-        -->
-    </div>
+    <div class="col-1"></div>
 </div>
 
 
-<script src="/js/main.js"></script>
+<script src="/js/http-client.js"></script>
+<script src="/js/code-blocks.js"></script>
+<script src="/js/terminal-screen.js"></script>

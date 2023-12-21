@@ -1,0 +1,253 @@
+{
+  "SaleToPOIResponse": {
+    "ReversalResponse": {
+      "POIData": {
+        "POITransactionID": {
+          "TimeStamp": "2013-06-12T12:08:36+00:00",
+          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+        }
+      },
+      "Response": {
+        "Result": "Success",
+        "AdditionalResponse": ".+"
+      },
+      "PaymentReceipt": [
+        {
+          "OutputContent": {
+            "OutputFormat": "Text",
+            "OutputText": [
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=header1",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=http%3a%2f%2fwww.adyen.com%2f&key=header2",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=MERCHANT%20COPY&key=merchantTitle",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Date&value=.*&key=txdate"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Time&value=.*&key=txtime"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Card&value=(%2a){4,}9990&key=pan"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Payment%20method&value=mc&key=paymentMethod"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Entry%20mode&value=ICC&key=posEntryMode"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=TID&value=1234&key=tid"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=PTID&value=1234&key=ptid"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Tender&value=1234&key=txRef"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Reference&value=1234&key=mref"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Type&value=GOODS_SERVICES&key=txtype"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=TOTAL&value=%e2%82%ac%2010.99&key=totalAmount",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=%2aVOID%20REQUESTED%2a&key=void",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=QRCode&value=.*&key=QRCode"
+              }
+            ]
+          },
+          "DocumentQualifier": "CashierReceipt"
+        },
+        {
+          "OutputContent": {
+            "OutputFormat": "Text",
+            "OutputText": [
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=header1",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=http%3a%2f%2fwww.adyen.com%2f&key=header2",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=CARDHOLDER%20COPY&key=cardholderHeader",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Date&value=.*&key=txdate"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Time&value=.*&key=txtime"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Card&value=(%2a){4,}9990&key=pan"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Payment%20method&value=mc&key=paymentMethod"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Entry%20mode&value=ICC&key=posEntryMode"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=TID&value=1234&key=tid"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=PTID&value=1234&key=ptid"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Tender&value=1234&key=txRef"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Reference&value=1234&key=mref"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=Type&value=GOODS_SERVICES&key=txtype"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=TOTAL&value=%e2%82%ac%2010.99&key=totalAmount",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "key=filler"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=%2aVOID%20REQUESTED%2a&key=void",
+                "CharacterStyle": "Bold"
+              },
+              {
+                "EndOfLineFlag": true,
+                "Text": "name=QRCode&value=.*&key=QRCode"
+              }
+            ]
+          },
+          "DocumentQualifier": "CustomerReceipt"
+        }
+      ]
+    },
+    "MessageHeader": {
+      "ProtocolVersion": "3.0",
+      "SaleID": "SALE_ID_42",
+      "MessageClass": "Service",
+      "MessageCategory": "Reversal",
+      "ServiceID": "1234567890AB",
+      "POIID": "V400m-123456789",
+      "MessageType": "Response"
+    }
+  }
+}

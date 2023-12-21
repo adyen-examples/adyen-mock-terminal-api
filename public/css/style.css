@@ -11,13 +11,14 @@
 }
 
 body {
-    /*overflow: hidden;*/
+    overflow: hidden;
     font-family: "Fakt", sans-serif;
 }
 
 .main {
     color: var(--white-color);
     background: linear-gradient(90deg, var(--adyen-dark-color), #333333, var(--adyen-green-color));
+    height: 100vh;
 }
 
 /* Terminal start */
@@ -27,17 +28,18 @@ body {
     flex-direction: column;
     border-radius: var(--terminal-border-radius);
     transform: perspective(1920px) rotateX(10deg); /* Apply the perspective effect */
-    padding: 24px;
+    padding: 16px;
 }
 
 .screen {
     display: grid;
-    font-size: 20px;
+    font-size: 14px;
+    font-weight: bold;
     background-color: var(--white-color);
     color: var(--adyen-dark-color);
     border-radius: 4px;
-    padding: 16px;
-    height: 360px;
+    padding: 12px;
+    height: 260px;
     border: 1px solid var(--gray-highlight-color);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     user-select: none;
@@ -51,17 +53,17 @@ body {
     border-radius: var(--terminal-border-radius) var(--terminal-border-radius) 0 0;
     background: var(--gray-highlight-color);
     padding: 24px 16px;
-    transform: translateY(3px) perspective(1080px) rotateX(-10deg) scale(1.036); /* Apply the perspective effect */
+    transform: translateY(3px) perspective(1080px) rotateX(-10deg) scale(1.025); /* Apply the perspective effect */
 }
 
 .terminal-bottom {
     border-radius: 0 0 var(--terminal-border-radius) var(--terminal-border-radius);
     background: var(--gray-highlight-color);
-    padding: 28px;
+    padding: 24px;
 }
 
 .digits {
-    font-size: 24px;
+    font-size: 16px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
@@ -70,13 +72,13 @@ body {
 
 .digit-button,
 .action-button {
-    padding: 16px 24px;
+    padding: 16px;
     border: none;
     border-radius: 5px;
     background-color: var(--adyen-dark-color);
     color: white;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: bolder;
     transform: scale(1);
     filter: brightness(0.9);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
@@ -119,70 +121,53 @@ body {
 
 /* Terminal end */
 
+/* Send request button start */
 
-/* Test card start */
-.credit-card {
-    font-size: 12px;
-    color: var(--adyen-dark-color);
-    width: 240px;
-    padding: 20px;
-    margin: 20px;
-    border: 2px solid #ccc;
+#send-button {
+    padding: 4px;
+    width: 96px;
+    height: 32px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background-color: var(--adyen-green-color);
+    border: 1px solid var(--gray-accent-color);
     border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.24s ease-in;
 }
 
-.credit-card:hover {
-    transform: scale(1.02);
-    transition: transform 0.1s ease-out;
+#send-button:focus,
+#send-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
 }
 
-.card-number {
-    font-size: 15px;
-    font-weight: bolder;
-    margin-bottom: 15px;
+#trigger-request-dropdown {
+    padding: 8px 0;
 }
 
-.card-info {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-}
-
-.card-description {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 0 8px 0;
-}
-
-.card-holder, .card-cvc, .card-expiry {
-    color: var(--adyen-dark-color);
-}
-/* Test card end*/
-
+/* Send request button end */
 
 /* Code highlight start */
 
 code {    
     display: block;
-    background: #2b303b;
     border-radius: 8px;
     overflow: scroll;
 }
 
 .request {
-    padding-top: 8px;
+    padding-top: 2px;
+    font-size: 14px;
     font-weight: bold;
 }
 
 .response {
+    font-size: 14px;
     font-weight: bold;
 }
 
 .maximize-height {
-    height: 320px;
+    height: 35vh;
 }
 
 /* Code highlight end */
@@ -192,11 +177,15 @@ code {
 #screen-pin {
     text-align: center;
     border-radius: 8px;
-    font-size: 48px;
+    font-size: 32px;
     font-weight: bolder;
-    letter-spacing: 24px;
-    height: 64px;
-    border: 2px solid #ccc;
+    letter-spacing: 16px;
+    height: 48px;
+    border: 2px solid var(--gray-highlight-color);
+}
+
+#screen-pin.hidden {
+    border: 0 solid var(--gray-highlight-color);
 }
 
 /* Screen pin end */

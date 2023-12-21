@@ -1,0 +1,29 @@
+{
+  "SaleToPOIRequest": {
+    "MessageHeader": {
+      "ProtocolVersion": "3.0",
+      "MessageClass": "Service",
+      "MessageCategory": "Reversal",
+      "MessageType": "Request",
+      "ServiceID": "1234567890AB",
+      "SaleID": "SALE_ID_42",
+      "POIID": "V400m-123456789"
+    },
+    "ReversalRequest": {
+      "ReversalReason": "MerchantCancel",
+      "OriginalPOITransaction": {
+        "POITransactionID": {
+          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e",
+          "TimeStamp": "2023-05-12T12:08:36+00:00"
+        }
+      },
+      "SaleData": {
+        "SaleToAcquirerData": "tenderOption=ReceiptHandler",
+        "SaleTransactionID": {
+          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e",
+          "TimeStamp": "2023-06-12T12:08:36+00:00"
+        }
+      }
+    }
+  }
+}

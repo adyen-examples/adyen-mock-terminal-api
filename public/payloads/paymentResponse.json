@@ -1,0 +1,35 @@
+{
+  "SaleToPOIResponse": {
+    "MessageHeader": {
+      "ProtocolVersion": "3.0",
+      "MessageClass": "Service",
+      "MessageCategory": "Payment",
+      "MessageType": "Response",
+      "ServiceID": "1234567890AB",
+      "SaleID": "SALE_ID_42",
+      "POIID": "V400m-123456789"
+    },
+    "PaymentResponse": {
+      "POIData": "",
+      "PaymentReceipt": [],
+      "PaymentResult": {
+        "AmountsResp": {
+          "AuthorizedAmount": 10.99,
+          "Currency": "EUR"
+        },
+        "PaymentAcquirerData": "",
+        "PaymentInstrumentData": ""
+      },
+      "Response": {
+        "AdditionalResponse": "...",
+        "Result": "Success"
+      },
+      "SaleData": {
+        "SaleTransactionID": {
+          "TimeStamp": "2023-12-02T16:16:48.163Z",
+          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+        }
+      }
+    }
+  }
+}

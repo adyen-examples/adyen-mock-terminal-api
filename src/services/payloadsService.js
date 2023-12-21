@@ -3,7 +3,11 @@ const path = require('path');
 
 class PayloadsService {
     constructor() {
-        this.data = getData(path.join(__dirname, '../../public/payloads'));
+        if (!PayloadsService.instance) {
+            this.data = getData(path.join(__dirname, '../../public/payloads'));
+        }
+        
+        return PayloadsService.instance;
     }
 
     /**
@@ -12,12 +16,12 @@ class PayloadsService {
      * Example entry: { "payment", [PaymentRequest, PaymentResponse] }
      * @returns {Map<string, string[]>}
      */
-    getData() {
+    getPayloads() {
         return this.data;
     }
-
+    
     /**
-     * Get the request and response pair by prefix (key).
+     * Get the request pair by prefix (key).
      * @param {string} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
      * @returns {string[]} - JsonObject.
      */
@@ -32,6 +36,15 @@ class PayloadsService {
      */
     getResponseByPrefix(prefix) {
         return this.data[prefix][1];
+    }
+
+    /**
+     * Get the request and response pair by prefix (key).
+     * @param {string} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
+     * @returns {string[]} - JsonObject.
+     */
+    getValueByPrefix(prefix) {
+        return this.data[prefix];
     }
 }
 
@@ -62,5 +75,5 @@ function getData(directory) {
     return map;
 }
 
-const instance = new PayloadsService();
-module.exports = instance;
+const payloadService = new PayloadsService();
+module.exports = payloadService;

@@ -1,0 +1,21 @@
+{
+  "SaleToPOIRequest": {
+    "MessageHeader": {
+      "ProtocolVersion": "3.0",
+      "MessageClass": "Service",
+      "MessageCategory": "Abort",
+      "MessageType": "Request",
+      "ServiceID": "1234567890AB",
+      "SaleID": "SALE_ID_42",
+      "POIID": "V400m-123456789"
+    },
+    "AbortRequest": {
+      "MessageReference": {
+        "MessageCategory": "Payment",
+        "ServiceID": "1234567890AB",
+        "SaleID": "SALE_ID_42"
+      },
+      "AbortReason": "MerchantAbort"
+    }
+  }
+}

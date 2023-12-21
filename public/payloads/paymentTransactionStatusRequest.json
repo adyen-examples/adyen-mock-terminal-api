@@ -1,0 +1,25 @@
+{
+  "SaleToPOIRequest": {
+    "MessageHeader": {
+      "ProtocolVersion": "3.0",
+      "MessageClass": "Service",
+      "MessageCategory": "TransactionStatus",
+      "MessageType": "Request",
+      "ServiceID": "1234567890AB",
+      "SaleID": "SALE_ID_42",
+      "POIID": "V400m-123456789"
+    },
+    "TransactionStatusRequest": {
+      "ReceiptReprintFlag": true,
+      "DocumentQualifier": [
+        "CashierReceipt",
+        "CustomerReceipt"
+      ],
+      "MessageReference": {
+        "MessageCategory": "Payment",
+        "SaleID": "SALE_ID_42",
+        "ServiceID": "1234567890AB"
+      }
+    }
+  }
+}

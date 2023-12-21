@@ -1,0 +1,364 @@
+{
+  "SaleToPOIResponse": {
+    "TransactionStatusResponse": {
+      "MessageReference": {
+        "SaleID": "SALE_ID_42",
+        "MessageCategory": "Payment",
+        "ServiceID": "1234567890AB"
+      },
+      "Response": {
+        "Result": "Success"
+      },
+      "RepeatedMessageResponse": {
+        "RepeatedResponseMessageBody": {
+          "PaymentResponse": {
+            "POIData": {
+              "POITransactionID": {
+                "TimeStamp": "2023-06-12T12:08:36+00:00",
+                "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+              },
+              "POIReconciliationID": "1234"
+            },
+            "SaleData": {
+              "SaleTransactionID": {
+                "TimeStamp": "2023-06-12T12:08:36+00:00",
+                "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+              }
+            },
+            "PaymentReceipt": [
+              {
+                "RequiredSignatureFlag": "false",
+                "DocumentQualifier": "CashierReceipt",
+                "OutputContent": {
+                  "OutputFormat": "Text",
+                  "OutputText": [
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "key=header1",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "name=http%3a%2f%2fwww.thelongestdomainnameintheworldandthensomeandthensomemoreandmore.com%2f&key=header2",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "name=.+&key=merchantTitle",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Date&value=.+&key=txdate",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=.+&value=.+key=txtime",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Card&value=[%2a]+1234&key=pan",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=PAN%20seq.&value=1234&key=panSeq",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=.+key=preferredName",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Card%20type&value=mc&key=cardType",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Payment%20method&value=mc&key=paymentMethod",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Payment%20variant&value=mc&key=paymentMethodVariant",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Entry%20mode&value=Contactless%20chip&key=posEntryMode",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=AID&value=1234&key=aid",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=MID&value=1234&key=mid",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=TID&value=12345&key=tid",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=PTID&value=1234&key=ptid",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Auth.%20code&value=1234&key=authCode",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Tender&value=1234&key=txRef",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Reference&value=1234&key=mref",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Type&value=GOODS_SERVICES&key=txtype",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "name=TOTAL&value=(%e2%82%ac|EUR)%2010.99&key=totalAmount",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "name=APPROVED&key=approved",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=QRCode&value=www.adyen.com%2f1234&key=QRCode",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    }
+                  ]
+                }
+              },
+              {
+                "RequiredSignatureFlag": "false",
+                "DocumentQualifier": "CustomerReceipt",
+                "OutputContent": {
+                  "OutputFormat": "Text",
+                  "OutputText": [
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "key=header1",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "name=http%3a%2f%2fwww.thelongestdomainnameintheworldandthensomeandthensomemoreandmore.com%2f&key=header2",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "name=CARDHOLDER%20COPY&key=cardholderHeader",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Date&value=.+&key=txdate",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Time&value=.+&key=txtime",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Card&value=[%2a]+1234&key=pan",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=PAN%20seq.&value=1234&key=panSeq",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=.+&value=.+&key=preferredName",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Card%20type&value=mc&key=cardType",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Payment%20method&value=mc&key=paymentMethod",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Payment%20variant&value=mc&key=paymentMethodVariant",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Entry%20mode&value=Contactless%20chip&key=posEntryMode",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=AID&value=1234&key=aid",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=MID&value=1234&key=mid",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=TID&value=1234&key=tid",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=PTID&value=1234&key=ptid",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Auth.%20code&value=1234&key=authCode",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Tender&value=1234&key=txRef",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Reference&value=1234&key=mref",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Type&value=GOODS_SERVICES&key=txtype",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "name=TOTAL&value=(%e2%82%ac|EUR)%2010.99&key=totalAmount",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "CharacterStyle": "Bold",
+                      "Text": "name=APPROVED&key=approved",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "key=filler",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=.+key=retain",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=Thank%20you&key=thanks",
+                      "EndOfLineFlag": "true"
+                    },
+                    {
+                      "Text": "name=QRCode&value=www.adyen.com%2f1234&key=QRCode",
+                      "EndOfLineFlag": "true"
+                    }
+                  ]
+                }
+              }
+            ],
+            "PaymentResult": {
+              "OnlineFlag": "true",
+              "PaymentAcquirerData": {
+                "AcquirerPOIID": "V400m-123456789",
+                "ApprovalCode": "1234",
+                "AcquirerTransactionID": {
+                  "TimeStamp": "2023-06-12T12:08:36+00:00",
+                  "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+                },
+                "MerchantID": "some-guid"
+              },
+              "PaymentInstrumentData": {
+                "CardData": {
+                  "EntryMode": [
+                    "Contactless"
+                  ],
+                  "PaymentBrand": "mc",
+                  "MaskedPan": "12345 * 6789",
+                  "CardCountryCode": "123",
+                  "SensitiveCardData": {
+                    "CardSeqNumb": "12",
+                    "ExpiryDate": "1234"
+                  }
+                },
+                "PaymentInstrumentType": "Card"
+              },
+              "AmountsResp": {
+                "AuthorizedAmount": 10.99,
+                "Currency": "EUR"
+              }
+            },
+            "Response": {
+              "Result": "Success",
+              "AdditionalResponse": ".+"
+            }
+          }
+        },
+        "MessageHeader": {
+          "ProtocolVersion": "3.0",
+          "SaleID": "SALE_ID_42",
+          "MessageClass": "Service",
+          "MessageCategory": "Payment",
+          "ServiceID": "1234567890AB",
+          "POIID": "V400m-123456789AB",
+          "MessageType": "Response"
+        }
+      }
+    },
+    "MessageHeader": {
+      "ProtocolVersion": "3.0",
+      "SaleID": "SALE_ID_42",
+      "MessageClass": "Service",
+      "MessageCategory": "TransactionStatus",
+      "ServiceID": "1234567890AB",
+      "POIID": "V400m-123456789",
+      "MessageType": "Response"
+    }
+  }
+}
