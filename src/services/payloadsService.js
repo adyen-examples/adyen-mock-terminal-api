@@ -57,7 +57,7 @@ function getData(directory) {
     const map = {};
     const files = fs.readdirSync(directory);
 
-    // Filter files that end with '-Request.json' and extract the matching '-Response.json'
+    // Map files that end with '-Request.json' and extract the matching '-Response.json'
     const requestFiles = files.filter(file => file.endsWith('Request.json'));
     requestFiles.forEach(requestFile => {
         const requestFilePath = path.join(directory, requestFile);
@@ -71,6 +71,9 @@ function getData(directory) {
             map[prefix] = [requestJson, responseJson]; // { "payment", [PaymentRequest, PaymentResponse] }
         }
     });
+    
+    // Map "paymentBusy"-response manually, which does not have a predefined request.
+    map["paymentBusy"] = [ null, JSON.parse(fs.readFileSync(path.join(directory, `paymentBusyResponse.json`), 'utf8'))];
 
     return map;
 }

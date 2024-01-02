@@ -21,28 +21,26 @@ async function sendPostRequest(url, data) {
     return await res.json();
 }
 
-let intervalId = null;
-async function pollLastRequest() {
+async function pollEndpoint(endpoint, callback) {
     let pollingInterval;
-    
+
     async function poll() {
         try {
-            const lastRequest = await sendGetRequest('/last-request');
-            console.info(lastRequest);
-            
+            const response = await sendGetRequest(endpoint);
+            if (response && Object.keys(response).length > 0) {
+                callback(response);
+            }
         } catch (error) {
             console.error(error);
         }
     }
 
-    pollingInterval = setInterval(poll, 2000);
-        
+    pollingInterval = setInterval(poll, 400);
+
     await poll();
-    
+
     return function stopPolling() {
         clearInterval(pollingInterval);
-        console.log("polling stopped");
-    }
+        console.log(`Stopped polling for ${endpoint}.`);
+    };
 }
-
-pollLastRequest();

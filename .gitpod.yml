@@ -8,11 +8,11 @@ tasks:
     command: |
       # Run the application based on specified $path.
       echo "Starting application in $(pwd)"
-      npm run dev
+      npm start
 
 # exposed ports
 ports:
-  - port: 8080
+  - port: 3000
     onOpen: open-preview
     visibility: public
 

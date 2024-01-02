@@ -1,29 +1,15 @@
 async function sendRequestButtonOnClick() {
     try {
-        clearRequestCodeBlock();
-        clearResponseCodeBlock();
+        disableEnterPinScreen();
         const dropdown = document.getElementById('request-dropdown');
-       
         const requestObject = await sendGetRequest("/requests/" + dropdown.value);
-        console.info(requestObject)
-        updateRequestCodeBlock(requestObject);
-        
-        selectedJsonRequest = requestObject;
         
         if (requestObject.SaleToPOIRequest.PaymentRequest) {
             enableEnterPinScreen();
-        } else { 
-            if (requestObject.SaleToPOIRequest.AbortRequest) {
-                updateScreen("Transaction aborted ...");
-            } else if (requestObject.SaleToPOIRequest.TransactionStatusRequest) {
-                updateScreen("Transaction Status requested ...");
-            } else if (requestObject.SaleToPOIRequest.ReversalRequest) {
-                updateScreen("Reversal requested ...");
-            }
-            const responseObject = await sendPostRequest("/sync", selectedJsonRequest);
-            updateResponseCodeBlock(responseObject);
-            console.info(responseObject);
-        }
+        } 
+        
+        const responseObject = await sendPostRequest("/sync", requestObject);
+        updateResponseCodeBlock(responseObject);
     } catch(error) {
         console.error(error);
     }
@@ -38,11 +24,6 @@ function updateRequestCodeBlock(request) {
     hljs.highlightElement(document.getElementById('json-requests'));
 }
 
-function clearRequestCodeBlock() {
-    const requestElement = document.getElementById("json-requests");
-    requestElement.textContent = "";
-}
-
 function updateResponseCodeBlock(response) {
     const responseElement = document.getElementById("json-responses");
     if (responseElement.hasAttribute('data-highlighted')) {
@@ -52,7 +33,6 @@ function updateResponseCodeBlock(response) {
     hljs.highlightElement(document.getElementById('json-responses'));
 }
 
-function clearResponseCodeBlock() {
-    const responseElement = document.getElementById("json-responses");
-    responseElement.textContent = "";
-}
+
+let lastRequest = pollEndpoint('/get-last-request', updateRequestCodeBlock);
+let lastResponse = pollEndpoint('/get-last-response', updateResponseCodeBlock);
