@@ -8,4 +8,6 @@ RUN npm install
 
 COPY . .
 
-CMD [ "npm", "start" ]
+EXPOSE 3000
+
+CMD ["sh", "-c", "npm start --port=${PORT:-3000}"]
