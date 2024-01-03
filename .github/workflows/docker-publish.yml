@@ -4,6 +4,12 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
+    paths-ignore:
+      - README.md
+      - .dockerignore
+      - .gitignore
+      - .gitpod.yml
+      - LICENSE
     tags:
       - 'v*'
 

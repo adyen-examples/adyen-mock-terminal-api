@@ -5,7 +5,7 @@ Note that this application is not able to reject all invalid requests.
 
 Currently, the Mock terminal is used to end-to-end test our In-Person Payments Integration Examples in [**.NET**](https://github.com/adyen-examples/adyen-dotnet-online-payments/tree/main/in-person-payments-example), [**Java**](https://github.com/adyen-examples/adyen-java-spring-online-payments/tree/main/in-person-payments-example) or [**Node.js**](https://github.com/adyen-examples/adyen-node-online-payments/tree/main/in-person-payments-example).
 
-> Note: This application is in its alpha-phase.
+> Note: This application is currently in its alpha-release.
 
 ## Prerequisites
 - Node.js 18+
