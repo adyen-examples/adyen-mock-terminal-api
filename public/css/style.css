@@ -21,6 +21,7 @@ body {
     height: 100vh;
 }
 
+
 /* Terminal start */
 
 .terminal {
@@ -121,6 +122,7 @@ body {
 
 /* Terminal end */
 
+
 /* Send request button start */
 
 #send-button {
@@ -147,6 +149,30 @@ body {
 
 /* Send request button end */
 
+
+/* Clear code-block button start */
+
+#clear-codeblock-button {
+    padding: 4px;
+    width: 96px;
+    height: 32px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background-color: var(--yellow-color);
+    border: 1px solid var(--gray-accent-color);
+    border-radius: 8px;
+}
+
+#clear-codeblock-button:focus,
+#clear-codeblock-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
+}
+
+/* Clear code-block button end */
+
+
 /* Code highlight start */
 
 code {    
@@ -171,6 +197,7 @@ code {
 }
 
 /* Code highlight end */
+
 
 /* Screen pin start */
 

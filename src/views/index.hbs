@@ -13,16 +13,17 @@
                     {{/each}}
                 </select>
                 <button id="send-button" onclick="sendRequestButtonOnClick()">Send</button>
+                <button id="clear-codeblock-button" onclick="clearCodeblockButtonOnClick()">Clear</button>
             </div>
 
-            <div class="request">Request:
+            <div class="request">Request
                 <pre>
                     <code id="json-requests" class="maximize-height language-json"></code>
                 </pre> 
             </div>
         </div>
         <div class="row-5">
-            <div class="response">Response:
+            <div class="response">Response
                 <pre>
                     <code id="json-responses" class="maximize-height language-json"></code>
                 </pre>

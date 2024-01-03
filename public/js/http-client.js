@@ -1,3 +1,7 @@
+/**
+    Helper functions that allow you to send GET/POST requests or poll endpoints.
+**/
+
 async function sendGetRequest(url) {
     const res = await fetch(url, {
         method: "GET",
@@ -18,10 +22,11 @@ async function sendPostRequest(url, data) {
             "Keep-Alive": "timeout=180, max=180"
         },
     });
+    
     return await res.json();
 }
 
-async function pollEndpoint(endpoint, callback) {
+async function pollEndpoint(endpoint, callback, milliseconds = 400) {
     let pollingInterval;
 
     async function poll() {
@@ -35,12 +40,12 @@ async function pollEndpoint(endpoint, callback) {
         }
     }
 
-    pollingInterval = setInterval(poll, 400);
+    pollingInterval = setInterval(poll, milliseconds);
 
     await poll();
 
     return function stopPolling() {
         clearInterval(pollingInterval);
-        console.log(`Stopped polling for ${endpoint}.`);
+        console.log(`Stopped polling ${endpoint}.`);
     };
 }

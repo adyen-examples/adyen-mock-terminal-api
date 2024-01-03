@@ -1,21 +1,37 @@
+/**
+    Handles polling & highlighting of the request/response code blocks.
+**/
+
 async function sendRequestButtonOnClick() {
     try {
-        disableEnterPinScreen();
+        // Clear the codeblocks.
+        clearCodeblockButtonOnClick();
+
+        // Select correct request from dropdown.
         const dropdown = document.getElementById('request-dropdown');
-        const requestObject = await sendGetRequest("/requests/" + dropdown.value);
-        
-        if (requestObject.SaleToPOIRequest.PaymentRequest) {
-            enableEnterPinScreen();
-        } 
-        
-        const responseObject = await sendPostRequest("/sync", requestObject);
-        updateResponseCodeBlock(responseObject);
+
+        // Find the mock request to send.
+        const requestToSend = await sendGetRequest("/requests/" + dropdown.value);
+
+        // Send the request to the sync endpoint.
+        const response = await sendPostRequest("/sync", requestToSend);
+        updateResponseCodeblock(response);
     } catch(error) {
         console.error(error);
     }
 }
 
-function updateRequestCodeBlock(request) {
+async function clearCodeblockButtonOnClick() {
+    try {
+        const response = await sendPostRequest("/clear-codeblocks-button");
+        updateRequestCodeblock(response);
+        updateResponseCodeblock(response);
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+function updateRequestCodeblock(request) {
     const requestElement = document.getElementById("json-requests");
     if (requestElement.hasAttribute('data-highlighted')) {
         requestElement.removeAttribute('data-highlighted');
@@ -24,7 +40,7 @@ function updateRequestCodeBlock(request) {
     hljs.highlightElement(document.getElementById('json-requests'));
 }
 
-function updateResponseCodeBlock(response) {
+function updateResponseCodeblock(response) {
     const responseElement = document.getElementById("json-responses");
     if (responseElement.hasAttribute('data-highlighted')) {
         responseElement.removeAttribute('data-highlighted');
@@ -33,6 +49,5 @@ function updateResponseCodeBlock(response) {
     hljs.highlightElement(document.getElementById('json-responses'));
 }
 
-
-let lastRequest = pollEndpoint('/get-last-request', updateRequestCodeBlock);
-let lastResponse = pollEndpoint('/get-last-response', updateResponseCodeBlock);
+pollEndpoint('/get-last-request', updateRequestCodeblock);
+pollEndpoint('/get-last-response', updateResponseCodeblock);

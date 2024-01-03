@@ -13,12 +13,12 @@ router.get("/", async (req, res) => {
 
 router.get("/requests/:prefix", async (req, res) => {
     const { prefix } = req.params;
-    storageService.setLastRequest(payloadService.getRequestByPrefix(prefix));
     res.status(200).send(payloadService.getRequestByPrefix(prefix));
 });
 
 router.post("/sync", async (req, res) => {
-    console.info("incoming /sync request");
+    console.info("Incoming /sync request ...");
+    storageService.setLastRequest(req.body);
     let response = null;
     
     try {
@@ -26,12 +26,12 @@ router.post("/sync", async (req, res) => {
         if (req.body.SaleToPOIRequest.AbortRequest) {
             response = payloadService.getResponseByPrefix("abortPayment");
             storageService.setLastResponse(response);
-            storageService.setState(storageService.STATES.READY);
+            reset();
             res.status(200).send(response);
             return;
         }
         
-        // Handle busy response.
+        // Handle paymentBusy response.
         let state = storageService.getState();
         if (state === storageService.STATES.BUSY) {
             response = payloadService.getResponseByPrefix("paymentBusy");
@@ -40,51 +40,19 @@ router.post("/sync", async (req, res) => {
             return;
         }
         
-        // Set terminal to busy and start handling logic.
-        storageService.setState(storageService.STATES.BUSY);
-        
         if (req.body.SaleToPOIRequest.PaymentRequest) {
+            // Set terminal to busy and start handling logic.
+            storageService.setState(storageService.STATES.BUSY);
+
             // Wait for the confirm button if a payment request is sent.
-            const waitResult = await new Promise(resolve => {
-                let totalSeconds = 15;
-                const countdown = () => {
-                    if (terminalService.getIsConfirmed() === true) {  
-                        // Pin code entered, accept any pin for now.
-                        console.info("Confirm-button pressed");
-                        terminalService.setIsConfirmed(false);
-                        terminalService.clearPin();
-                        resolve(true);
-                    } else if (storageService.getState() === storageService.STATES.READY) { 
-                        // State changed, f.e. `cancel-button` is pressed.
-                        console.info("Cancelled by user");
-                        storageService.clearLastRequest();
-                        storageService.clearLastResponse();
-                        terminalService.clearPin();
-                        resolve(false);
-                    } else if (totalSeconds > 0) { 
-                        // Waiting `totalSeconds` for user to enter pin...
-                        console.info("Polling... " + totalSeconds);
-                        totalSeconds--;
-                        setTimeout(countdown, 1000);
-                    } else { 
-                        // Time out.
-                        console.info("Request has timed-out.");
-                        storageService.clearLastRequest();
-                        storageService.clearLastResponse();
-                        terminalService.clearPin();
-                        resolve(false);
-                    }
-                };
+            const isPinEntered = await getPinResult();
 
-                countdown(); // Start the countdown initially
-            });
-
-            if (waitResult === true) {
+            if (isPinEntered) {
                 response = payloadService.getResponseByPrefix("payment");
                 storageService.setLastResponse(response);
             }
 
-            storageService.setState(storageService.STATES.READY);
+            reset();
             res.status(200).send(response);
             return;
         }
@@ -103,13 +71,55 @@ router.post("/sync", async (req, res) => {
             return;
         }
 
-        res.status(404).send("not found");
+        res.status(404).send("Request not found.");
     } catch(e) {
+        reset();
         console.error(e);
-        terminalService.clearPin();
-        storageService.setState(storageService.STATES.READY);
     }
 });
+
+
+function reset() {
+    terminalService.clearPin();
+    terminalService.setIsConfirmed(false);
+    storageService.setState(storageService.STATES.READY);
+}
+
+
+const getPinResult = async () => {
+    return new Promise(async resolve => {
+        let totalSeconds = 180;
+        const waitForPinResult = () => {
+            if (terminalService.getIsConfirmed() === true) {  
+                // Pin code entered, accept any pin for now.
+                console.info("Confirm-button pressed.");
+                resolve(true);
+            } else if (storageService.getState() === storageService.STATES.READY) { 
+                // State changed, f.e. red `cancel-button` is pressed.
+                console.info("Cancelled by user.");
+                storageService.clearLastRequest();
+                storageService.clearLastResponse();
+                resolve(false);
+            } else if (totalSeconds > 0) { 
+                // Waiting `totalSeconds` for user to enter pin...
+                console.info("Waiting for pin input... " + totalSeconds);
+                totalSeconds--;
+                setTimeout(waitForPinResult, 1000);
+            } else { 
+                // Time out.
+                console.info("Request has timed-out.");
+                storageService.clearLastRequest();
+                storageService.clearLastResponse();
+                resolve(false);
+            }
+        };
+
+        waitForPinResult();
+    });
+};
+
+
+
 
 /* Request & Response code-blocks screen start */
 
@@ -121,16 +131,11 @@ router.get("/get-last-response", async (req, res) => {
     res.status(200).json(storageService.getLastResponse());
 });
 
-router.get("/get-pin", async (req, res) => {
-    if (storageService.getState() === storageService.STATES.READY) {
-        res.status(200).send({});
-        return;
-    }
-    
-    res.status(200).send({ pin: terminalService.getPin() });
-});
-
 /* Request & Response code-blocks screen end */
+
+
+
+
 
 /* Terminal-screen pin buttons start */
 
@@ -141,6 +146,7 @@ router.post("/enter-pin", async (req, res) => {
     if (currentPin.length < 4) {
         terminalService.setPin(currentPin + "*");
     }
+
     res.status(200).send({ pin: terminalService.getPin() });
 });
 
@@ -159,7 +165,6 @@ router.post("/clear-button", async (req, res) => {
     }
     
     terminalService.clearPin();
-    console.info("Cleared pin.");
     res.status(200).send({});
 });
 
@@ -172,10 +177,25 @@ router.post("/cancel-button", async (req, res) => {
     storageService.clearLastRequest();
     storageService.clearLastResponse();
     storageService.setState(storageService.STATES.READY);
+
     console.info("Cancelled entering pin.");
     res.status(200).send({});
 });
 
+router.post("/clear-codeblocks-button", async (req, res) => {
+    storageService.clearLastRequest();
+    storageService.clearLastResponse();
+
+    console.info("Cleared the request/response codeblocks.");
+    res.status(200).send({});
+});
+''
+router.get("/get-state", async (req, res) => {
+    res.status(200).send({ state: storageService.getState() });
+});
+
 /* Terminal-screen pin buttons end */
+
+
 
 module.exports = router;

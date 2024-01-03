@@ -4,7 +4,7 @@ const path = require('path');
 class PayloadsService {
     constructor() {
         if (!PayloadsService.instance) {
-            this.data = getData(path.join(__dirname, '../../public/payloads'));
+            this.data = getRequestsAndResponses(path.join(__dirname, '../../public/payloads'));
         }
         
         return PayloadsService.instance;
@@ -21,16 +21,16 @@ class PayloadsService {
     }
     
     /**
-     * Get the request pair by prefix (key).
+     * Gets the request pair by prefix (key).
      * @param {string} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
-     * @returns {string[]} - JsonObject.
+     * @returns {string} - JsonObject.
      */
     getRequestByPrefix(prefix) {
         return this.data[prefix][0];
     }
 
     /**
-     * Get the response by prefix (key).
+     * Gets the response by prefix (key).
      * @param {string} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
      * @returns {string} - JsonObject.
      */
@@ -39,9 +39,9 @@ class PayloadsService {
     }
 
     /**
-     * Get the request and response pair by prefix (key).
+     * Gets the request and response pair by prefix (key).
      * @param {string} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
-     * @returns {string[]} - JsonObject.
+     * @returns {string[]} - [JsonObject, JsonObject]
      */
     getValueByPrefix(prefix) {
         return this.data[prefix];
@@ -49,11 +49,11 @@ class PayloadsService {
 }
 
 /**
- * Use reflection in the '/public/payloads'-folder to get extract the '-Request.json' and '-Response.json'.
+ * Use reflection in the '/public/payloads'-folder to load and parse the '-Request.json' and '-Response.json' objects.
  * @param {string} directory - The directory to extract the data from.
  * @returns {Map<string, string[]>} 
  */
-function getData(directory) {
+function getRequestsAndResponses(directory) {
     const map = {};
     const files = fs.readdirSync(directory);
 
@@ -74,6 +74,8 @@ function getData(directory) {
     
     // Map "paymentBusy"-response manually, which does not have a predefined request.
     map["paymentBusy"] = [ null, JSON.parse(fs.readFileSync(path.join(directory, `paymentBusyResponse.json`), 'utf8'))];
+
+    console.info("Found " + Object.keys(map).length + " mock payloads.")
 
     return map;
 }
