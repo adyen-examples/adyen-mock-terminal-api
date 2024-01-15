@@ -1,7 +1,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require('path');
-const webRoutes = require('./src/routes/webRoutes');
+const apiRoutes = require('./src/routes/apiRoutes');
 
 const port = process.env.PORT || 3000;
 
@@ -27,6 +27,6 @@ app.engine("hbs", handlebars({
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "src", "views"));
 
-app.use("/", webRoutes);
+app.use("/", apiRoutes);
 
 app.listen(port, () => console.log(`Server started -> http://localhost:${port}`));

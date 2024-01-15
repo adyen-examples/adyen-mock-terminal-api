@@ -170,6 +170,15 @@ body {
     transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
 }
 
+#clear-codeblock-button:active,
+#clear-codeblock-button:active {
+    transform: translateY(2px);
+}
+
+#clear-codeblock-button:checked {
+    border-style: none;
+}
+
 /* Clear code-block button end */
 
 
@@ -194,6 +203,34 @@ code {
 
 .maximize-height {
     height: 35vh;
+}
+
+.copy-button {
+    padding: 4px;
+    width: 96px;
+    height: 32px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background-color: var(--gray-color);
+    border: 1px solid var(--gray-accent-color);
+    border-radius: 8px;
+}
+    
+.copy-button:focus,
+.copy-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
+    outline: none;
+}
+
+.copy-button:active,
+.copy-button:active {
+    transform: translateY(1px);
+}
+
+.copy-button:checked {
+    border-style: none;
 }
 
 /* Code highlight end */

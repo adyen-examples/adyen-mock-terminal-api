@@ -19,6 +19,7 @@ router.get("/requests/:prefix", async (req, res) => {
 router.post("/sync", async (req, res) => {
     console.info("Incoming /sync request ...");
     storageService.setLastRequest(req.body);
+    storageService.clearLastResponse();
     let response = null;
     
     try {

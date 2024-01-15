@@ -49,5 +49,25 @@ function updateResponseCodeblock(response) {
     hljs.highlightElement(document.getElementById('json-responses'));
 }
 
+async function OnClickCopyJsonRequest() {
+    const requestElement = document.getElementById("json-requests");
+    try {
+        await navigator.clipboard.writeText(requestElement.textContent);
+        console.log("Text successfully copied to clipboard.");
+    } catch (error) {
+        console.error("Unable to copy text to clipboard: ", error);
+    }
+}
+
+async function OnClickCopyJsonResponse() {
+    const requestElement = document.getElementById("json-responses");
+    try {
+        await navigator.clipboard.writeText(requestElement.textContent);
+        console.log("Text successfully copied to clipboard.");
+    } catch (error) {
+        console.error("Unable to copy text to clipboard: ", error);
+    }
+}
+
 pollEndpoint('/get-last-request', updateRequestCodeblock);
 pollEndpoint('/get-last-response', updateResponseCodeblock);
