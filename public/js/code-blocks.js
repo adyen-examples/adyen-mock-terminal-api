@@ -32,38 +32,64 @@ async function clearCodeblockButtonOnClick() {
 }
 
 function updateRequestCodeblock(request) {
+    const jsonRequest = `${JSON.stringify(request, null, 2)}`;
     const requestElement = document.getElementById("json-requests");
+    if (requestElement.textContent === jsonRequest) {
+        return; // Only update the JsonRequest element when there are changes.
+    }
+
     if (requestElement.hasAttribute('data-highlighted')) {
         requestElement.removeAttribute('data-highlighted');
     }
-    requestElement.textContent = `${JSON.stringify(request, null, 2)}`;
+    requestElement.textContent = jsonRequest;
     hljs.highlightElement(document.getElementById('json-requests'));
 }
 
 function updateResponseCodeblock(response) {
+    const jsonResponse = `${JSON.stringify(response, null, 2)}`;
     const responseElement = document.getElementById("json-responses");
+    if (responseElement.textContent === jsonResponse) {
+        return;  // Only update the JsonResponse element when there are changes.
+    }
+    
     if (responseElement.hasAttribute('data-highlighted')) {
         responseElement.removeAttribute('data-highlighted');
     }
-    responseElement.textContent = `${JSON.stringify(response, null, 2)}`;
+    
+    responseElement.textContent = jsonResponse;
     hljs.highlightElement(document.getElementById('json-responses'));
 }
 
-async function OnClickCopyJsonRequest() {
+function isDeepEqual(arg1, arg2) {
+    if (Object.prototype.toString.call(arg1) === Object.prototype.toString.call(arg2)) {
+        if (Object.prototype.toString.call(arg1) === '[object Object]' || Object.prototype.toString.call(arg1) === '[object Array]') {
+            if (Object.keys(arg1).length !== Object.keys(arg2).length) {
+                return false;
+            }
+            return (Object.keys(arg1).every(function (key) {
+                return deepCompare(arg1[key], arg2[key]);
+            }));
+        }
+        return (arg1 === arg2);
+    }
+    return false;
+}
+
+async function onClickCopyJsonRequest() {
     const requestElement = document.getElementById("json-requests");
     try {
         await navigator.clipboard.writeText(requestElement.textContent);
-        console.log("Text successfully copied to clipboard.");
+        console.log("JSON-request successfully copied to clipboard.");
     } catch (error) {
         console.error("Unable to copy text to clipboard: ", error);
     }
 }
 
-async function OnClickCopyJsonResponse() {
+async function onClickCopyJsonResponse() {
     const requestElement = document.getElementById("json-responses");
     try {
         await navigator.clipboard.writeText(requestElement.textContent);
-        console.log("Text successfully copied to clipboard.");
+        console.log("JSON-response successfully copied to clipboard.");
     } catch (error) {
         console.error("Unable to copy text to clipboard: ", error);
     }

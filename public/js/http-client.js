@@ -9,7 +9,7 @@ async function sendGetRequest(url) {
             "Content-Type": "application/json"
         }
     });
-    return await res.json();
+    return res.json();
 }
 
 async function sendPostRequest(url, data) {
@@ -23,7 +23,7 @@ async function sendPostRequest(url, data) {
         },
     });
     
-    return await res.json();
+    return res.json();
 }
 
 async function pollEndpoint(endpoint, callback, milliseconds = 400) {
@@ -32,9 +32,13 @@ async function pollEndpoint(endpoint, callback, milliseconds = 400) {
     async function poll() {
         try {
             const response = await sendGetRequest(endpoint);
-            if (response && Object.keys(response).length > 0) {
-                callback(response);
+
+            // Empty response.
+            if (!response || Object.keys(response).length === 0) {
+                return;
             }
+            
+            callback(response);
         } catch (error) {
             console.error(error);
         }

@@ -49,32 +49,42 @@ class PayloadsService {
 }
 
 /**
- * Use reflection in the '/public/payloads'-folder to load and parse the '-Request.json' and '-Response.json' objects.
- * @param {string} directory - The directory to extract the data from.
+ * Use reflection (e.g. '/public/payloads'-folder) to load and parse the '-Request.json' and '-Response.json' objects from each directory.
+ * @param {string} rootPath - The path of the directory to extract the JSONs from.
  * @returns {Map<string, string[]>} 
  */
-function getRequestsAndResponses(directory) {
+function getRequestsAndResponses(rootPath) {
     const map = {};
-    const files = fs.readdirSync(directory);
+    const root = fs.readdirSync(rootPath);
 
-    // Map files that end with '-Request.json' and extract the matching '-Response.json'
-    const requestFiles = files.filter(file => file.endsWith('Request.json'));
-    requestFiles.forEach(requestFile => {
-        const requestFilePath = path.join(directory, requestFile);
-        
-        const prefix = requestFile.replace('Request.json', '');
-        const responseFilePath = path.join(directory, `${prefix}Response.json`);
+    root.forEach(file => {
+       const filePath = path.join(rootPath, file); 
+       const stat = fs.statSync(filePath);
+       
+       if (stat.isDirectory()) {
+           const files = fs.readdirSync(filePath);
 
-        if (fs.existsSync(responseFilePath)) {
-            const requestJson = JSON.parse(fs.readFileSync(requestFilePath, 'utf8'));
-            const responseJson = JSON.parse(fs.readFileSync(responseFilePath, 'utf8'));
-            map[prefix] = [requestJson, responseJson]; // { "payment", [PaymentRequest, PaymentResponse] }
-        }
+           // Find `Request.json` and `Response.json` files.
+           const requestFile = files.find(f => f.endsWith('Request.json'));
+           const responseFile = files.find(f => f.endsWith('Response.json'));
+           
+           // Parse (optional) `Request.json`.
+           let requestJson = null;
+           if (requestFile) {
+               const requestFilePath = path.join(filePath, requestFile);
+               requestJson = JSON.parse(fs.readFileSync(requestFilePath, 'utf8'));
+           }
+           
+           // Parse (mandatory) `Response.json`.
+           const responseFilePath = path.join(filePath, responseFile);
+           const responseJson = JSON.parse(fs.readFileSync(responseFilePath, 'utf8'));
+
+           // Default - Insert into our map: { "payment", [PaymentRequestJson, PaymentResponseJson] }
+           // If no `Request,json` is found (f.e. for `paymentBusy`), insert only the response into our map: { "paymentBusy", [null, PaymentBusyResponseJson] }
+           map[file] = [requestJson, responseJson];
+       }
     });
     
-    // Map "paymentBusy"-response manually, which does not have a predefined request.
-    map["paymentBusy"] = [ null, JSON.parse(fs.readFileSync(path.join(directory, `paymentBusyResponse.json`), 'utf8'))];
-
     console.info("Found " + Object.keys(map).length + " mock payloads.")
 
     return map;
