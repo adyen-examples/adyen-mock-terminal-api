@@ -5,14 +5,21 @@
     --red-color: #e74c3c;
     --white-color: #f0f0f0;
     --gray-color: #7e8a8f;
+    --gray-dark-color: #525257;
     --gray-accent-color: #48525a;
     --gray-highlight-color: #cccccc;
     --terminal-border-radius: 12px;
 }
 
 body {
+    display: flex;
     overflow: hidden;
     font-family: "Fakt", sans-serif;
+    margin: 0;
+}
+
+h2 {
+    padding: 32px;
 }
 
 .main {
@@ -21,15 +28,35 @@ body {
     height: 100vh;
 }
 
+/* Sections start */
+.trigger-request-section {
+    display: block;
+    width: 860px;
+    padding: 0 32px;
+}
+
+.code-section {
+    display: inline-grid;
+    width: 860px;
+    padding: 0 32px;
+}
+
+.terminal-section {
+    margin: 0 0 0 96px;
+    display: inline-grid;
+    width: 480px;
+    padding: 0 16px;
+}
+
+/* Sections end */
 
 /* Terminal start */
 
 .terminal {
-    display: flex;
+    display: inline-grid;
     flex-direction: column;
     border-radius: var(--terminal-border-radius);
     transform: perspective(1920px) rotateX(10deg); /* Apply the perspective effect */
-    padding: 16px;
 }
 
 .screen {
@@ -126,9 +153,10 @@ body {
 /* Send request button start */
 
 #send-button {
+    margin: 0 0 0 8px;
     padding: 4px;
     width: 96px;
-    height: 32px;
+    height: 48px;
     outline: none;
     cursor: pointer;
     color: white;
@@ -144,7 +172,20 @@ body {
 }
 
 #trigger-request-dropdown {
+    border-radius: 16px;
+    display: flex;
     padding: 8px 0;
+}
+
+#request-dropdown {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+label {
+    margin-right: 8px;
+    font-weight: bold;
 }
 
 /* Send request button end */
@@ -153,9 +194,10 @@ body {
 /* Clear code-block button start */
 
 #clear-codeblock-button {
+    margin: 0 0 0 8px;
     padding: 4px;
     width: 96px;
-    height: 32px;
+    height: 48px;
     outline: none;
     cursor: pointer;
     color: white;
@@ -184,49 +226,51 @@ body {
 
 /* Code highlight start */
 
-code {    
-    display: block;
+code {
     border-radius: 8px;
-    overflow: scroll;
 }
 
 .request {
-    padding-top: 2px;
-    font-size: 14px;
+    position: relative;
     font-weight: bold;
 }
 
 .response {
-    font-size: 14px;
+    position: relative;
     font-weight: bold;
 }
 
 .maximize-height {
-    height: 35vh;
+    height: 26vh;
 }
 
 .copy-button {
+    font-family: sans-serif;
+    position: absolute;
+    bottom: 64px;
+    right: 32px;
+    margin: 0 0 0 8px;
     padding: 4px;
     width: 96px;
-    height: 32px;
+    height: 48px;
     outline: none;
     cursor: pointer;
     color: white;
-    background-color: var(--gray-color);
+    background-color: var(--gray-dark-color);
     border: 1px solid var(--gray-accent-color);
     border-radius: 8px;
 }
-    
+
 .copy-button:focus,
 .copy-button:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
     outline: none;
 }
 
 .copy-button:active,
 .copy-button:active {
-    transform: translateY(1px);
+    transform: translateY(2px);
 }
 
 .copy-button:checked {

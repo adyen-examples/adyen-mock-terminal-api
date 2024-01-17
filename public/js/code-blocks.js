@@ -5,7 +5,7 @@
 async function sendRequestButtonOnClick() {
     try {
         // Clear the codeblocks.
-        clearCodeblockButtonOnClick();
+        await clearCodeblockButtonOnClick();
 
         // Select correct request from dropdown.
         const dropdown = document.getElementById('request-dropdown');
@@ -71,9 +71,9 @@ async function onClickCopyJsonRequest() {
 }
 
 async function onClickCopyJsonResponse() {
-    const requestElement = document.getElementById("json-responses");
+    const responseElement = document.getElementById("json-responses");
     try {
-        await navigator.clipboard.writeText(requestElement.textContent);
+        await navigator.clipboard.writeText(responseElement.textContent);
         console.log("JSON-response successfully copied to clipboard.");
     } catch (error) {
         console.error("Unable to copy text to clipboard: ", error);

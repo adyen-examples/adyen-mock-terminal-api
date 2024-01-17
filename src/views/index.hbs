@@ -1,74 +1,67 @@
-<div class="row">
-    <div class="col-6">
-        <div class="row-5">
-            <div id="trigger-request-dropdown">
-                <label for="request-dropdown">Trigger request: </label>
-                <select id="request-dropdown">
-                    {{#each keys}}
-                        {{#if (isEqual this "payment")}}
-                            <option value="{{this}}" selected>{{toUpperCase this}} Request</option>
-                        {{else}}
-                            <option value="{{this}}">{{toUpperCase this}} Request</option>
-                        {{/if}}
-                    {{/each}}
-                </select>
-                <button id="send-button" onclick="sendRequestButtonOnClick()">Send</button>
-                <button id="clear-codeblock-button" onclick="clearCodeblockButtonOnClick()">Clear</button>
-            </div>
+<h2>Adyen Mock Terminal-API</h2>
 
-            <div class="request">Request
-                <button class="copy-button" onclick="onClickCopyJsonRequest()">Copy</button>
-                <pre>
-                    <code id="json-requests" class="maximize-height language-json"></code>
-                </pre> 
-            </div>
-        </div>
-        <div class="row-5">
-            <div class="response">Response
-                <button class="copy-button" onclick="onClickCopyJsonResponse()">Copy</button>
-                <pre>
-                    <code id="json-responses" class="maximize-height language-json"></code>
-                </pre>
-            </div>
-        </div>
+<div class="trigger-request-section">
+    <div id="trigger-request-dropdown">
+        <label for="request-dropdown"></label>
+        <select id="request-dropdown">
+            {{#each keys}}
+                {{#if (isEqual this "payment")}}
+                    <option value="{{this}}" selected>{{toUpperCase this}} Request</option>
+                {{else}}
+                    <option value="{{this}}">{{toUpperCase this}} Request</option>
+                {{/if}}
+            {{/each}}
+        </select>
+        <button id="send-button" onclick="sendRequestButtonOnClick()">Send</button>
+        <button id="clear-codeblock-button" onclick="clearCodeblockButtonOnClick()">Clear</button>
     </div>
-    
-    <div class="col-1"></div>
-    
-    <div class="col-4 terminal">
-        <div class="terminal-top">
-            <div class="screen">
-                <span id="screen">Send a Terminal API request to localhost:3000/sync...</span>
-                <span id="screen-pin" class="hidden"></span>
-            </div>
-        </div>
-        <div class="terminal-bottom">
-            <div class="digits">
-                <button id="1-button" class="digit-button">1</button>
-                <button id="2-button" class="digit-button">2</button>
-                <button id="3-button" class="digit-button">3</button>
-                <button id="cancel-button" class="action-button red">X</button>
-                
-                <button id="4-button" class="digit-button">4</button>
-                <button id="5-button" class="digit-button">5</button>
-                <button id="6-button" class="digit-button">6</button>
-                <button id="clear-button" class="action-button yellow">&lt;</button>
-                
-                <button id="7-button" class="digit-button">7</button>
-                <button id="8-button" class="digit-button">8</button>
-                <button id="9-button" class="digit-button">9</button>
-                <button id="confirm-button" class="action-button green">✓</button>
-                
-                <button id="star-button" class="digit-button">*</button>
-                <button id="0-button" class="digit-button">0</button>
-                <button id="hashtag-button" class="digit-button">#</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-1"></div>
 </div>
 
+<div class="code-section">
+    <div class="request">Request
+        <button class="copy-button" onclick="onClickCopyJsonRequest()">Copy</button>
+        <pre>
+            <code id="json-requests" class="maximize-height language-json hjls hljs"></code>
+        </pre>
+    </div>
+    <div class="response">Response
+        <button class="copy-button" onclick="onClickCopyJsonResponse()">Copy</button>
+        <pre>
+            <code id="json-responses" class="maximize-height language-json hjls hljs"></code>
+        </pre>
+    </div>
+</div>
+
+<div class="terminal-section">
+    <div class="terminal-top">
+        <div class="screen">
+            <span id="screen">Send a Terminal API request to localhost:3000/sync...</span>
+            <span id="screen-pin" class="hidden"></span>
+        </div>
+    </div>
+    <div class="terminal-bottom">
+        <div class="digits">
+            <button id="1-button" class="digit-button">1</button>
+            <button id="2-button" class="digit-button">2</button>
+            <button id="3-button" class="digit-button">3</button>
+            <button id="cancel-button" class="action-button red">X</button>
+
+            <button id="4-button" class="digit-button">4</button>
+            <button id="5-button" class="digit-button">5</button>
+            <button id="6-button" class="digit-button">6</button>
+            <button id="clear-button" class="action-button yellow">&lt;</button>
+
+            <button id="7-button" class="digit-button">7</button>
+            <button id="8-button" class="digit-button">8</button>
+            <button id="9-button" class="digit-button">9</button>
+            <button id="confirm-button" class="action-button green">✓</button>
+
+            <button id="star-button" class="digit-button">*</button>
+            <button id="0-button" class="digit-button">0</button>
+            <button id="hashtag-button" class="digit-button">#</button>
+        </div>
+    </div>
+</div>
 
 <script src="/js/http-client.js"></script>
 <script src="/js/code-blocks.js"></script>
