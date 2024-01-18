@@ -13,7 +13,7 @@ tasks:
 # exposed ports
 ports:
   - port: 3000
-    onOpen: open-preview
+    onOpen: open-browser
     visibility: public
 
 vscode:

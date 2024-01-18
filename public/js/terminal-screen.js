@@ -16,7 +16,7 @@ function enableEnterPinScreen() {
 function disableEnterPinScreen() {
     getScreenPinElement().classList.add("hidden");
     clearPin();
-    updateScreenText("Send a Terminal API request to localhost:3000/sync...");
+    updateScreenText("Send Terminal API requests to this application's `/sync` endpoint...");
 }
 
 function updatePin(pin) {
