@@ -1,3 +1,5 @@
+> Note: This mock application is currently in its alpha-release and is not supporting every request and response.
+
 # Adyen Mock Terminal Api Application
 Adyen Mock Terminal API is a mock server that handles requests and responses from a POS device. 
 Developers can use this to test their application quickly without having a physical POS device. 
@@ -5,9 +7,8 @@ Note that this application is not able to reject all invalid requests.
 
 Currently, the Mock terminal is used to end-to-end test our In-Person Payments Integration Examples in [**.NET**](https://github.com/adyen-examples/adyen-dotnet-online-payments/tree/main/in-person-payments-example), [**Java**](https://github.com/adyen-examples/adyen-java-spring-online-payments/tree/main/in-person-payments-example) or [**Node.js**](https://github.com/adyen-examples/adyen-node-online-payments/tree/main/in-person-payments-example).
 
-> Note: This application is currently in its alpha-release.
 
-Run this application on [Gitpod](gitpod.io#https://github.com/adyen-examples/adyen-mock-terminal-api). 
+[![Run this application on Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/adyen-examples/adyen-mock-terminal-api)
 
 ## Prerequisites
 - Node.js 18+ 
