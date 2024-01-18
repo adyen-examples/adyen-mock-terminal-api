@@ -187,7 +187,7 @@ router.post("/clear-codeblocks-button", async (req, res) => {
     storageService.clearLastRequest();
     storageService.clearLastResponse();
 
-    console.info("Cleared the request/response codeblocks.");
+    console.info("Cleared the request and response codeblocks.");
     res.status(200).send({});
 });
 ''

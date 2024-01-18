@@ -3,91 +3,112 @@
     --adyen-green-color: #0abf53;
     --yellow-color: #f1c40f;
     --red-color: #e74c3c;
-    --white-color: #f0f0f0;
+    --semi-white-color: #f0f0f0;
     --gray-color: #7e8a8f;
     --gray-dark-color: #525257;
     --gray-accent-color: #48525a;
     --gray-highlight-color: #cccccc;
+    --terminal-top-device-color: #dedede;
+    --terminal-bottom-device-color: #ededed;
     --terminal-border-radius: 12px;
 }
 
 body {
-    display: flex;
-    overflow: hidden;
     font-family: "Fakt", sans-serif;
-    margin: 0;
-}
-
-h2 {
-    padding: 32px;
 }
 
 .main {
-    color: var(--white-color);
-    background: linear-gradient(90deg, var(--adyen-dark-color), #333333, var(--adyen-green-color));
-    height: 100vh;
+    color: var(--semi-white-color);
+    background: var(--adyen-dark-color);
+    min-height: 100vh;
 }
 
 /* Sections start */
 .trigger-request-section {
-    display: block;
+    display: flex;
     width: 860px;
     padding: 0 32px;
 }
 
-.code-section {
+.codeblock-section {
     display: inline-grid;
     width: 860px;
     padding: 0 32px;
 }
 
 .terminal-section {
-    margin: 0 0 0 96px;
     display: inline-grid;
-    width: 480px;
-    padding: 0 16px;
+    margin: 0 96px;
+    width: 360px;
+    padding-bottom: 16px;
 }
 
 /* Sections end */
 
-/* Terminal start */
 
+/* Trigger request start */
+.trigger-request-section-title {
+    font-size: larger;
+    font-weight: bold;
+    padding: 12px;
+}
+
+.trigger-request-dropdown {
+    border-radius: 16px;
+    padding: 8px 0;
+}
+
+.request-dropdown {
+    padding: 8px;
+    border: 1px solid var(--semi-white-color);
+    border-radius: 8px;
+}
+
+.request-dropdown:focus {
+    outline: none;
+}
+
+label {
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+/* Trigger request end */
+
+
+/* Terminal start */
 .terminal {
     display: inline-grid;
     flex-direction: column;
     border-radius: var(--terminal-border-radius);
-    transform: perspective(1920px) rotateX(10deg); /* Apply the perspective effect */
+}
+
+.terminal-top {
+    border-radius: var(--terminal-border-radius) var(--terminal-border-radius) 0 0;
+    background: var(--terminal-top-device-color);
+    padding: 24px 16px;
+}
+
+.terminal-bottom {
+    border-radius: 0 0 var(--terminal-border-radius) var(--terminal-border-radius);
+    background: var(--terminal-bottom-device-color);
+    padding: 24px;
 }
 
 .screen {
     display: grid;
-    font-size: 14px;
     font-weight: bold;
-    background-color: var(--white-color);
+    background-color: var(--semi-white-color);
     color: var(--adyen-dark-color);
-    border-radius: 4px;
-    padding: 12px;
-    height: 260px;
-    border: 1px solid var(--gray-highlight-color);
+    border-radius: 8px;
+    padding: 8px;
+    height: 280px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     user-select: none;
 }
 
 .screen span {
     text-align: center;
-}
-
-.terminal-top {
-    border-radius: var(--terminal-border-radius) var(--terminal-border-radius) 0 0;
-    background: var(--gray-highlight-color);
-    padding: 24px 16px;
-    transform: translateY(3px) perspective(1080px) rotateX(-10deg) scale(1.025); /* Apply the perspective effect */
-}
-
-.terminal-bottom {
-    border-radius: 0 0 var(--terminal-border-radius) var(--terminal-border-radius);
-    background: var(--gray-highlight-color);
-    padding: 24px;
 }
 
 .digits {
@@ -102,39 +123,37 @@ h2 {
 .action-button {
     padding: 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: var(--adyen-dark-color);
-    color: white;
+    color: var(--semi-white-color);
     cursor: pointer;
     font-weight: bolder;
-    transform: scale(1);
     filter: brightness(0.9);
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
     outline: none;
+    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
 }
 
 .action-button.yellow {
-    color: white;
     background-color: var(--yellow-color);
 }
 
 .action-button.red {
-    color: white;
     background-color: var(--red-color);
 }
 
 .action-button.green {
-    color: white;
     background-color: var(--adyen-green-color);
 }
 
-.digit-button:focus,
-.action-button:focus,
 .digit-button:hover,
 .action-button:hover {
-    filter: brightness(1.1);
-    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
+    filter: brightness(1.11);
     transform: scale(1.03);
+}
+
+.digit-button:focus,
+.action-button:focus {
     outline: none;
 }
 
@@ -143,157 +162,143 @@ h2 {
     transform: translateY(2px);
 }
 
-.digit-button:checked {
-    border-style: none;
-}
-
 /* Terminal end */
 
 
-/* Send request button start */
+/* Screen pin start */
+.screen-pin {
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bolder;
+    letter-spacing: 12px;
+    height: 48px;
+    border: 1px solid var(--gray-highlight-color);
+    border-radius: 8px;
+    margin-left: 48px;
+    margin-right: 48px;
+}
 
-#send-button {
-    margin: 0 0 0 8px;
+.screen-pin.hidden {
+    border: 0 solid var(--gray-highlight-color);
+}
+
+/* Screen pin end */
+
+
+/* Button start */
+.button {
+    margin-left: 8px;
     padding: 4px;
     width: 96px;
-    height: 48px;
     outline: none;
     cursor: pointer;
-    color: white;
+    color: var(--semi-white-color);
+    border: 1px solid var(--gray-accent-color);
+    border-radius: 8px;
+    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
+}
+
+.button.green {
     background-color: var(--adyen-green-color);
-    border: 1px solid var(--gray-accent-color);
-    border-radius: 8px;
 }
 
-#send-button:focus,
-#send-button:hover {
-    transform: scale(1.05);
-    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
-}
-
-#trigger-request-dropdown {
-    border-radius: 16px;
-    display: flex;
-    padding: 8px 0;
-}
-
-#request-dropdown {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-label {
-    margin-right: 8px;
-    font-weight: bold;
-}
-
-/* Send request button end */
-
-
-/* Clear code-block button start */
-
-#clear-codeblock-button {
-    margin: 0 0 0 8px;
-    padding: 4px;
-    width: 96px;
-    height: 48px;
-    outline: none;
-    cursor: pointer;
-    color: white;
+.button.yellow {
     background-color: var(--yellow-color);
-    border: 1px solid var(--gray-accent-color);
-    border-radius: 8px;
 }
 
-#clear-codeblock-button:focus,
-#clear-codeblock-button:hover {
+.button:hover {
     transform: scale(1.05);
-    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
 }
 
-#clear-codeblock-button:active,
-#clear-codeblock-button:active {
+.button:focus {
+    outline: none;
+}
+
+.button:active {
     transform: translateY(2px);
 }
 
-#clear-codeblock-button:checked {
-    border-style: none;
-}
-
-/* Clear code-block button end */
+/* Button end */
 
 
-/* Code highlight start */
-
+/* Codeblock highlight start */
 code {
     border-radius: 8px;
 }
 
 .request {
+    margin: 0;
     position: relative;
     font-weight: bold;
+    max-width: 800px;
+    white-space: nowrap;
+    word-wrap: break-word;
 }
 
 .response {
+    margin: 0;
     position: relative;
     font-weight: bold;
+    max-width: 800px;
+    white-space: nowrap;
+    word-wrap: break-word;
 }
 
 .maximize-height {
     height: 26vh;
 }
 
+/* Codeblock highlight end */
+
+
+/* Copy button start */
 .copy-button {
-    font-family: sans-serif;
     position: absolute;
-    bottom: 64px;
+    bottom: 74px;
     right: 32px;
     margin: 0 0 0 8px;
     padding: 4px;
     width: 96px;
     height: 48px;
-    outline: none;
     cursor: pointer;
-    color: white;
+    color: var(--semi-white-color);
     background-color: var(--gray-dark-color);
-    border: 1px solid var(--gray-accent-color);
     border-radius: 8px;
+    border: none;
+    outline: none;
+    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
 }
 
-.copy-button:focus,
 .copy-button:hover {
     transform: scale(1.03);
-    transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
+}
+
+.copy-button:focus {
     outline: none;
 }
 
-.copy-button:active,
 .copy-button:active {
     transform: translateY(2px);
 }
 
-.copy-button:checked {
-    border-style: none;
+/* Copy button end */
+
+
+/* Indicator highlight start */
+
+.indicator-highlight-start {
+    filter: brightness(1.11);
+    transform: scale(1.03);
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
-/* Code highlight end */
-
-
-/* Screen pin start */
-
-#screen-pin {
-    text-align: center;
-    border-radius: 8px;
-    font-size: 32px;
-    font-weight: bolder;
-    letter-spacing: 16px;
-    height: 48px;
-    border: 2px solid var(--gray-highlight-color);
+.indicator-highlight-end {
+    filter: brightness(1);
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out;
 }
 
-#screen-pin.hidden {
-    border: 0 solid var(--gray-highlight-color);
-}
 
-/* Screen pin end */
+/* Indicator highlight end */

@@ -7,9 +7,12 @@ Currently, the Mock terminal is used to end-to-end test our In-Person Payments I
 
 > Note: This application is currently in its alpha-release.
 
-## Prerequisites
-- Node.js 18+
+Run this application on [Gitpod](gitpod.io#https://github.com/adyen-examples/adyen-mock-terminal-api). 
 
+## Prerequisites
+- Node.js 18+ 
+
+> We recommend to use an application that can send Terminal-API requests or one of our [**.NET**](https://github.com/adyen-examples/adyen-dotnet-online-payments/tree/main/in-person-payments-example), [**Java**](https://github.com/adyen-examples/adyen-java-spring-online-payments/tree/main/in-person-payments-example), [**Node.js**](https://github.com/adyen-examples/adyen-node-online-payments/tree/main/in-person-payments-example) example-integrations.
 
 ## 1. Installation
 

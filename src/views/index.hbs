@@ -1,9 +1,8 @@
-<h2>Adyen Mock Terminal-API</h2>
-
 <div class="trigger-request-section">
-    <div id="trigger-request-dropdown">
+    <div class="trigger-request-section-title">Adyen Mock Terminal-API</div>
+    <div id="trigger-request-dropdown" class="trigger-request-dropdown">
         <label for="request-dropdown"></label>
-        <select id="request-dropdown">
+        <select id="request-dropdown" class="request-dropdown">
             {{#each keys}}
                 {{#if (isEqual this "payment")}}
                     <option value="{{this}}" selected>{{toUpperCase this}} Request</option>
@@ -12,19 +11,19 @@
                 {{/if}}
             {{/each}}
         </select>
-        <button id="send-button" onclick="sendRequestButtonOnClick()">Send</button>
-        <button id="clear-codeblock-button" onclick="clearCodeblockButtonOnClick()">Clear</button>
+        <button id="send-button" class="button green" onclick="sendRequestButtonOnClick()">Send</button>
+        <button id="clear-codeblock-button" class="button yellow" onclick="clearCodeblockButtonOnClick()">Clear</button>
     </div>
 </div>
 
-<div class="code-section">
-    <div class="request">Request
+<div class="codeblock-section">
+    <div id="codeblock-request-section" class="request">Request
         <button class="copy-button" onclick="onClickCopyJsonRequest()">Copy</button>
         <pre>
             <code id="json-requests" class="maximize-height language-json hjls hljs"></code>
         </pre>
     </div>
-    <div class="response">Response
+    <div id="codeblock-response-section" class="response">Response
         <button class="copy-button" onclick="onClickCopyJsonResponse()">Copy</button>
         <pre>
             <code id="json-responses" class="maximize-height language-json hjls hljs"></code>
@@ -32,33 +31,35 @@
     </div>
 </div>
 
-<div class="terminal-section">
-    <div class="terminal-top">
-        <div class="screen">
-            <span id="screen">Send a Terminal API request to localhost:3000/sync...</span>
-            <span id="screen-pin" class="hidden"></span>
+<div id="terminal-section" class="terminal-section">
+    <div class="terminal">
+        <div class="terminal-top">
+            <div class="screen">
+                <span id="screen">Send a Terminal API request to localhost:3000/sync...</span>
+                <span id="screen-pin" class="screen-pin hidden"></span>
+            </div>
         </div>
-    </div>
-    <div class="terminal-bottom">
-        <div class="digits">
-            <button id="1-button" class="digit-button">1</button>
-            <button id="2-button" class="digit-button">2</button>
-            <button id="3-button" class="digit-button">3</button>
-            <button id="cancel-button" class="action-button red">X</button>
+        <div class="terminal-bottom">
+            <div class="digits">
+                <button id="1-button" class="digit-button">1</button>
+                <button id="2-button" class="digit-button">2</button>
+                <button id="3-button" class="digit-button">3</button>
+                <button id="cancel-button" class="action-button red">X</button>
 
-            <button id="4-button" class="digit-button">4</button>
-            <button id="5-button" class="digit-button">5</button>
-            <button id="6-button" class="digit-button">6</button>
-            <button id="clear-button" class="action-button yellow">&lt;</button>
+                <button id="4-button" class="digit-button">4</button>
+                <button id="5-button" class="digit-button">5</button>
+                <button id="6-button" class="digit-button">6</button>
+                <button id="clear-button" class="action-button yellow">&lt;</button>
 
-            <button id="7-button" class="digit-button">7</button>
-            <button id="8-button" class="digit-button">8</button>
-            <button id="9-button" class="digit-button">9</button>
-            <button id="confirm-button" class="action-button green">✓</button>
+                <button id="7-button" class="digit-button">7</button>
+                <button id="8-button" class="digit-button">8</button>
+                <button id="9-button" class="digit-button">9</button>
+                <button id="confirm-button" class="action-button green">✓</button>
 
-            <button id="star-button" class="digit-button">*</button>
-            <button id="0-button" class="digit-button">0</button>
-            <button id="hashtag-button" class="digit-button">#</button>
+                <button id="star-button" class="digit-button">*</button>
+                <button id="0-button" class="digit-button">0</button>
+                <button id="hashtag-button" class="digit-button">#</button>
+            </div>
         </div>
     </div>
 </div>
@@ -66,3 +67,4 @@
 <script src="/js/http-client.js"></script>
 <script src="/js/code-blocks.js"></script>
 <script src="/js/terminal-screen.js"></script>
+<script src="/js/indicator-animations.js"></script>
