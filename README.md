@@ -1,18 +1,19 @@
 > [!IMPORTANT]
-> This mock application is currently in its alpha-release and is not supporting every request and response.
-> The current mock terminal supports requests for the following [Terminal API requests](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/):
+> This mock application is currently in its alpha-release and is not supporting every request and response. This application is **not** able to reject all invalid requests.
+>
+> We currently support the following [Terminal API requests](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/):
 > - [PaymentRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentrequest) | [PaymentResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) |  [PaymentBusyResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) 
 > - [ReversalRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalrequest) | [ReversalResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalresponse)
 > - [AbortRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoabortrequest)
 > - [TransactionStatusRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusrequest)  | [TransactionStatusResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusresponse)
 
 
-# Adyen Mock Terminal Api Application
-Adyen Mock Terminal API is a mock server that handles requests and responses from a POS device. 
-Developers can use this to test their application quickly without having a physical POS device. 
-Note that this application is not able to reject all invalid requests.
+# Adyen Mock Terminal-API Application
+The Adyen Mock Terminal-API Application is a mock server that handles incoming requests and returns hard-coded responses.
+Developers can use this to test their application quickly by sending their requests to the Mock Terminal-API Application (`localhost:3000`) instead of the Adyen servers.
+This application is **not** able to reject all invalid requests.
 
-Currently, the Mock terminal is used to end-to-end test our In-Person Payments Integration Examples in [**.NET**](https://github.com/adyen-examples/adyen-dotnet-online-payments/tree/main/in-person-payments-example), [**Java**](https://github.com/adyen-examples/adyen-java-spring-online-payments/tree/main/in-person-payments-example) or [**Node.js**](https://github.com/adyen-examples/adyen-node-online-payments/tree/main/in-person-payments-example).
+Currently, the Mock terminal is used to [end-to-end test](https://github.com/adyen-examples/adyen-testing-suite/tree/main/tests/in-person-payments) our In-Person Payments Integration Examples in [**.NET**](https://github.com/adyen-examples/adyen-dotnet-online-payments/tree/main/in-person-payments-example), [**Java**](https://github.com/adyen-examples/adyen-java-spring-online-payments/tree/main/in-person-payments-example) or [**Node.js**](https://github.com/adyen-examples/adyen-node-online-payments/tree/main/in-person-payments-example).
 
 
 [![Run this application on Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/adyen-examples/adyen-mock-terminal-api)
