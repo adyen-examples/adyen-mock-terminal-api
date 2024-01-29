@@ -1,5 +1,6 @@
 > Note: This mock application is currently in its alpha-release and is not supporting every request and response.
 
+
 # Adyen Mock Terminal Api Application
 Adyen Mock Terminal API is a mock server that handles requests and responses from a POS device. 
 Developers can use this to test their application quickly without having a physical POS device. 
@@ -9,6 +10,16 @@ Currently, the Mock terminal is used to end-to-end test our In-Person Payments I
 
 
 [![Run this application on Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/adyen-examples/adyen-mock-terminal-api)
+
+
+## Limitations
+
+The current mock terminal supports requests for the following [Terminal API requests](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/):
+- [PaymentRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentrequest) | [PaymentResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) |  [PaymentBusyResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) 
+- [ReversalRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalrequest) | [ReversalResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalresponse)
+- [AbortRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoabortrequest)
+- [TransactionStatusRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusrequest)  | [TransactionStatusResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusresponse)
+
 
 ## Prerequisites
 - Node.js 18+ 
@@ -41,15 +52,6 @@ Once you've cloned the example, you can point the application to use `http://loc
 
 
 2. Alternatively, you can use this stand-alone application and send terminal API requests from within the application.
-
-
-## Limitations
-
-The current mock terminal supports requests for the following [Terminal API requests](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/):
-- [PaymentRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentrequest) | [PaymentResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) |  [PaymentBusyResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) 
-- [ReversalRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalrequest) | [ReversalResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalresponse)
-- [AbortRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoabortrequest)
-- [TransactionStatusRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusrequest)  | [TransactionStatusResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusresponse)
 
 
 ## Contributing
