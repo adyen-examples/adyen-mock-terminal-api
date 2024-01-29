@@ -1,5 +1,5 @@
-> Note: This mock application is currently in its alpha-release and is not supporting every request and response.
-
+> [!IMPORTANT]
+> This mock application is currently in its alpha-release and is not supporting every request and response.
 
 # Adyen Mock Terminal Api Application
 Adyen Mock Terminal API is a mock server that handles requests and responses from a POS device. 
