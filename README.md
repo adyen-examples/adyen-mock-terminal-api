@@ -7,7 +7,6 @@
 > - [TransactionStatusRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusrequest)  | [TransactionStatusResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusresponse)
 
 
-
 # Adyen Mock Terminal Api Application
 Adyen Mock Terminal API is a mock server that handles requests and responses from a POS device. 
 Developers can use this to test their application quickly without having a physical POS device. 
@@ -18,8 +17,6 @@ Currently, the Mock terminal is used to end-to-end test our In-Person Payments I
 
 [![Run this application on Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/adyen-examples/adyen-mock-terminal-api)
 
-
-## Limitations
 
 ## Prerequisites
 - Node.js 18+ 
