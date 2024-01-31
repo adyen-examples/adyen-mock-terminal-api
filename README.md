@@ -67,13 +67,13 @@ We commit all our new features directly into our GitHub repository. Feel free to
    - Note: Every `-Request` should have a `-Response`. Except for those that require some kind of logic (f.e. "paymentBusyResponse").
 3. In `/src/routes/apiRoutes.js`, find the `/sync`-endpoint and the following code snippet. Notice these two lines: `req.body.SaleToPOIRequest.PaymentRequest` and `payloadService.getResponseByPrefix("payment")`.
 
-```
-    if (req.body.SaleToPOIRequest.PaymentRequest) {
-        response = payloadService.getResponseByPrefix("payment");
-        storageService.setLastResponse(response);
-        res.status(200).send(response);
-        return;
-    }
+```js
+if (req.body.SaleToPOIRequest.PaymentRequest) {
+    response = payloadService.getResponseByPrefix("payment");
+    storageService.setLastResponse(response);
+    res.status(200).send(response);
+    return;
+}
 ```
 3. Open a [Pull Request](https://github.com/adyen-examples/adyen-mock-terminal-api/compare) with your changes.
 
