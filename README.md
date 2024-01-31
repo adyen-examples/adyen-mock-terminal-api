@@ -65,9 +65,7 @@ We commit all our new features directly into our GitHub repository. Feel free to
    - Add your `Request` to `/public/payloads/**{payment}**/paymentRequest
    - Add your `Response` to `/public/payloads/**{payment}**/paymentResponse
    - Note: Every `-Request` should have a `-Response`. Except for those that require some kind of logic (f.e. "paymentBusyResponse").
-3. In `/src/routes/apiRoutes.js`, find the `/sync`-endpoint and the following code snippet:
-   - Notice: `req.body.SaleToPOIRequest.PaymentRequest`
-   - `payloadService.getResponseByPrefix("payment");`
+3. In `/src/routes/apiRoutes.js`, find the `/sync`-endpoint and the following code snippet. Notice these two lines: `req.body.SaleToPOIRequest.PaymentRequest` and `payloadService.getResponseByPrefix("payment")`.
 
 ```
     if (req.body.SaleToPOIRequest.PaymentRequest) {
