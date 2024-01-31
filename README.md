@@ -52,11 +52,34 @@ Once you've cloned the example, you can point the application to use `http://loc
 2. Alternatively, you can use this stand-alone application and send terminal API requests from within the application.
 
 
+
 ## Contributing
 
-We commit all our new features directly into our GitHub repository. Feel free to request or suggest new features or code changes yourself as well!
+We commit all our new features directly into our GitHub repository. Feel free to request or suggest new features or code changes yourself as well! Find out more in our [contributing](https://github.com/adyen-examples/.github/blob/main/CONTRIBUTING.md) guidelines.
 
-Find out more in our [contributing](https://github.com/adyen-examples/.github/blob/main/CONTRIBUTING.md) guidelines.
+
+### Example: Add your own mock request/response payload
+
+1. Fork this repository and create a new branch.
+2. The example below adds `paymentRequest.json` and `paymentResponse.json` (prefixed by `payment`). The `src/routes/services/payloadService` will automatically add this payload if the JSON is valid.
+   - Add your `Request` to `/public/payloads/**{payment}**/paymentRequest
+   - Add your `Response` to `/public/payloads/**{payment}**/paymentResponse
+   - Note: Every `-Request` should have a `-Response`. Except for those that require some kind of logic (f.e. "paymentBusyResponse").
+3. In `/src/routes/apiRoutes.js`, find the `/sync`-endpoint and the following code snippet:
+   - Notice: `req.body.SaleToPOIRequest.PaymentRequest`
+   - `payloadService.getResponseByPrefix("payment");`
+
+```
+    if (req.body.SaleToPOIRequest.PaymentRequest) {
+        response = payloadService.getResponseByPrefix("payment");
+        storageService.setLastResponse(response);
+        res.status(200).send(response);
+        return;
+    }
+```
+3. Open a [Pull Request](https://github.com/adyen-examples/adyen-mock-terminal-api/compare) with your changes.
+
+
 
 
 ## License
