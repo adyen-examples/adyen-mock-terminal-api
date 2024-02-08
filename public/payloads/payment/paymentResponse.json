@@ -10,7 +10,12 @@
       "POIID": "V400m-123456789"
     },
     "PaymentResponse": {
-      "POIData": "",
+      "POIData": {
+        "POITransactionID": {
+          "TimeStamp": "2023-06-12T12:08:36+00:00",
+          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+        }
+      },
       "PaymentReceipt": [],
       "PaymentResult": {
         "AmountsResp": {
