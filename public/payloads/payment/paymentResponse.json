@@ -13,7 +13,7 @@
       "POIData": {
         "POITransactionID": {
           "TimeStamp": "2023-06-12T12:08:36+00:00",
-          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+          "TransactionID": "v4W5001707426906003.RM4ZVZ7LFTGLNK82"
         }
       },
       "PaymentReceipt": [],
@@ -22,8 +22,13 @@
           "AuthorizedAmount": 10.99,
           "Currency": "EUR"
         },
-        "PaymentAcquirerData": "",
-        "PaymentInstrumentData": ""
+        "PaymentAcquirerData": {
+          "MerchantID": "YOUR_MERCHANT_ACCOUNT",
+          "AcquirerPOIID": "V400m-123456789"
+        },
+        "PaymentInstrumentData": {
+          "PaymentInstrumentType": "Card"
+        }
       },
       "Response": {
         "AdditionalResponse": "...",

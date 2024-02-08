@@ -269,6 +269,7 @@ code {
     border: none;
     outline: none;
     transition: transform 0.1s ease-out, filter 0.15s ease-in-out;
+    z-index: 99;
 }
 
 .copy-button:hover {
