@@ -1,4 +1,4 @@
-name: Build, Test & Push to Github Packages
+name: Build & Test Mock Terminal-API Application
 
 on:
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Run Mock Terminal-API Application
+    - name: Run Mock Terminal-API Application in background (&)
       run: npm start &
 
     - name: Install Playwright Browsers

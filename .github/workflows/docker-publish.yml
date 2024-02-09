@@ -1,4 +1,4 @@
-name: Build, Test & Push to Github Packages
+name: Push to Github Packages
 
 on:
   workflow_dispatch:
