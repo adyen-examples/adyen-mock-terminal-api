@@ -31,7 +31,7 @@ git clone https://github.com/adyen-examples/adyen-mock-terminal-api.git
 ```
 
 
-## 2. Run the application
+## 2. Run the Application
 
 ```
 npm install
@@ -51,6 +51,16 @@ Once you've cloned the example, you can point the application to use `http://loc
 
 2. Alternatively, you can use this stand-alone application and send terminal API requests from within the application.
 
+
+### Run Docker Image
+
+You can also run the `adyen-mock-terminal-api` in a Docker container which exposes the application on port 3000 (default).
+
+
+```
+  # Run on Mac (i.e. --platform linux/arm64/v8)
+ docker run --rm -d --name adyen-mock-terminal-api -p 3000:3000 -e PORT=3000 ghcr.io/adyen-examples/adyen-mock-terminal-api:main
+```
 
 
 ## Contributing
