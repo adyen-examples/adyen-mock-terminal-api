@@ -145,9 +145,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# package-lock
-package-lock.json
-
 # Playwright
 /test-results/
 /playwright-report/
