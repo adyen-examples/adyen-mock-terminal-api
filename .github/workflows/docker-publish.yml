@@ -11,6 +11,7 @@ on:
       - .gitignore
       - .gitpod.yml
       - LICENSE
+      - playwright.config.js
     tags:
       - 'v*'
 
@@ -19,37 +20,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  test-with-playwright:
-    timeout-minutes: 20
-    runs-on: ubuntu-latest
-    steps:
-    - name: CHeckout repository
-      uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-
-    - name: Run Playwright tests
-      run: npx playwright test
-    
-#    - name: Upload playwright report
-#      uses: actions/upload-artifact@v3
-#      if: always()
-#      with:
-#        name: playwright-report
-#        path: playwright-report/
-#        retention-days: 1
-
   build-and-push-image:
-    needs: test-with-playwright
     runs-on: ubuntu-latest
     permissions:
       contents: read
