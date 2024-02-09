@@ -61,7 +61,7 @@ function bindAllTerminalButtons() {
                     return;
                 }
 
-                let response = await sendPostRequest("/enter-pin");
+                let response = await sendPostRequest("/user-interaction/enter-pin");
                 if (response && Object.keys(response).length > 0) {
                     updatePin(response.pin);
                 }
@@ -83,7 +83,7 @@ function bindAllTerminalButtons() {
             return;
         }
     
-        await sendPostRequest("/confirm-button");
+        await sendPostRequest("/user-interaction/confirm-button");
     });
 
     // Binds orange `clear` button.
@@ -93,7 +93,7 @@ function bindAllTerminalButtons() {
             return;
         }
 
-        await sendPostRequest("/clear-button");
+        await sendPostRequest("/user-interaction/clear-button");
         clearPin();
     });
 
@@ -104,10 +104,10 @@ function bindAllTerminalButtons() {
             return;
         }
 
-        await sendPostRequest("/cancel-button");
+        await sendPostRequest("/user-interaction/cancel-button");
     });
 }
 
 bindAllTerminalButtons();
 
-pollEndpoint('/get-state', updateState);
+pollEndpoint('/user-interaction/get-state', updateState);

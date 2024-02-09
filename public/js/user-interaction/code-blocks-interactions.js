@@ -23,9 +23,9 @@ async function sendRequestButtonOnClick() {
 
 async function clearCodeblockButtonOnClick() {
     try {
-        const response = await sendPostRequest("/clear-codeblocks-button");
-        updateRequestCodeblock(response);
-        updateResponseCodeblock(response);
+        const result = await sendPostRequest("/user-interaction/clear-codeblocks-button");
+        updateRequestCodeblock(result);
+        updateResponseCodeblock(result);
     } catch(error) {
         console.error(error);
     }
@@ -80,5 +80,5 @@ async function onClickCopyJsonResponse() {
     }
 }
 
-pollEndpoint('/get-last-request', updateRequestCodeblock);
-pollEndpoint('/get-last-response', updateResponseCodeblock);
+pollEndpoint('/user-interaction/get-last-request', updateRequestCodeblock);
+pollEndpoint('/user-interaction/get-last-response', updateResponseCodeblock);

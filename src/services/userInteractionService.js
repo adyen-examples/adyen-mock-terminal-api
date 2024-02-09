@@ -1,17 +1,19 @@
-class StorageService {
+class UserInteractionService {
     constructor() {
-        if (!StorageService.instance) {
+        if (!UserInteractionService.instance) {
             this.STATES = {
                 READY: "READY",
                 BUSY: "BUSY"
             };
-
             this.lastRequest = {};
             this.lastResponse = {};
             this.state = this.STATES.READY;
+
+            this.pin = "";
+            this.isConfirmed = false;
         }
         
-        return StorageService.instance;
+        return UserInteractionService.instance;
     }
 
     /**
@@ -27,6 +29,13 @@ class StorageService {
      * @param {STATES state} - State of the terminal.
      */
     setState(state) {
+        if (this.state === state) {
+            console.info("State remains unchanged.");
+            return;
+        }
+        
+        this.clearPin();
+        this.setIsConfirmed(false);
         this.state = state;
         console.info("State changed to: " + state);
     }
@@ -49,13 +58,6 @@ class StorageService {
     }
     
     /**
-     * Remove last response returned by the terminal.
-     */
-    clearLastResponse() {
-        this.lastResponse = {};
-    }
-
-    /**
      * Get the last request returned by the terminal.
      * @returns {JsonObject} - JsonObject.
      */
@@ -75,10 +77,50 @@ class StorageService {
     /**
      * Remove last request returned by the terminal.
      */
-    clearLastRequest() {
-        this.lastRequest = {};
+    clearLastRequestAndResponse() {
+        this.setLastRequest({});
+        this.setLastResponse({});
+    }
+
+    /**
+     * Gets the pin-code.
+     * @returns {string pin} - Pin-code.
+     */
+    getPin() {
+        return this.pin;
+    }
+    
+    /**
+     * Sets the pin-code.
+     * @param {string pin} - Pin-code.
+     */
+    setPin(pin) {
+        this.pin = pin;
+    }
+    
+    /**
+     * Removes the pin-code.
+     */
+    clearPin() {
+        this.pin = "";
+    }
+    
+    /**
+     * Returns true when the green confirm-button is pressed on the terminal.
+     * @returns {boolean} - True when the confirm-button has been pressed.
+     */
+    getIsConfirmed() {
+        return this.isConfirmed;
+    }
+
+    /**
+     * Set to true when to green confirm-button is pressed on the terminal.
+     * @param {boolean isConfirmed} - True when the confirm-button has been pressed.
+     */
+    setIsConfirmed(isConfirmed) {
+        this.isConfirmed = isConfirmed;
     }
 }
 
-const storageService = new StorageService();
-module.exports = storageService;
+const userInteractionService = new UserInteractionService();
+module.exports = { userInteractionService, STATES: userInteractionService.STATES };
