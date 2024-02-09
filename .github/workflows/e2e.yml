@@ -38,7 +38,7 @@ jobs:
       run: npm ci
 
     - name: Run Mock Terminal-API Application
-      run: npm start
+      run: npm start &
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
