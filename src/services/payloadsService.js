@@ -80,7 +80,7 @@ function getRequestsAndResponses(rootPath) {
            const responseJson = JSON.parse(fs.readFileSync(responseFilePath, 'utf8'));
 
            // Default - Insert into our map: { "payment", [PaymentRequestJson, PaymentResponseJson] }
-           // If no `Request,json` is found (f.e. for `paymentBusy`), insert only the response into our map: { "paymentBusy", [null, PaymentBusyResponseJson] }
+           // If no `Request.json` is found (f.e. for `paymentBusy`), insert only the response into our map: { "paymentBusy", [null, PaymentBusyResponseJson] }
            map[file] = [requestJson, responseJson];
        }
     });

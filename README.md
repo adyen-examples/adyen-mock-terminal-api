@@ -31,7 +31,7 @@ git clone https://github.com/adyen-examples/adyen-mock-terminal-api.git
 ```
 
 
-## 2. Run the application
+## 2. Run the Application
 
 ```
 npm install
@@ -52,6 +52,16 @@ Once you've cloned the example, you can point the application to use `http://loc
 2. Alternatively, you can use this stand-alone application and send terminal API requests from within the application.
 
 
+### Run Docker Image
+
+You can also run the `adyen-mock-terminal-api` in a Docker container which exposes the application on port 3000 (default).
+
+
+```
+  # Run on Mac (i.e. --platform linux/arm64/v8)
+ docker run --rm -d --name adyen-mock-terminal-api -p 3000:3000 -e PORT=3000 ghcr.io/adyen-examples/adyen-mock-terminal-api:main
+```
+
 
 ## Contributing
 
@@ -64,14 +74,12 @@ We commit all our new features directly into our GitHub repository. Feel free to
 2. The example below adds `paymentRequest.json` and `paymentResponse.json` (prefixed by `payment`). The `src/routes/services/payloadService` will automatically add this payload if the JSON is valid.
    - Add your `Request` to `/public/payloads/**{payment}**/paymentRequest
    - Add your `Response` to `/public/payloads/**{payment}**/paymentResponse
-   - Note: Every `-Request` should have a `-Response`. Except for those that require some kind of logic (f.e. "paymentBusyResponse").
-3. In `/src/routes/apiRoutes.js`, find the `/sync`-endpoint and the following code snippet. Notice these two lines: `req.body.SaleToPOIRequest.PaymentRequest` and `payloadService.getResponseByPrefix("payment")`.
+   - Note: Every `-Request` should have a `-Response`. Except for those that require some kind of (state) logic (f.e. "paymentBusyResponse" triggers when a payment request is in-progress).
+3. In `/src/routes/defaultRoutes.js`, find the `/sync`-endpoint and the following code snippet:
 
 ```js
 if (req.body.SaleToPOIRequest.PaymentRequest) {
-    response = payloadService.getResponseByPrefix("payment");
-    storageService.setLastResponse(response);
-    res.status(200).send(response);
+    sendResponse(res, "payment");
     return;
 }
 ```

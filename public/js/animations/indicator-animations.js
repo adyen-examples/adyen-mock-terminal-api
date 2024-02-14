@@ -1,6 +1,6 @@
 /**
- Helper functions that allow us to highlight elements within the page.
- **/
+    Helper functions that allow us to highlight elements within the page.
+**/
 
 
 async function addIndicator(elementId, delayInMilliseconds = 0) {

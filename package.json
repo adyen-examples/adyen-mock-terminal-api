@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "echo \"starting...\" && node index",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint app.js"
   },
   "repository": {
@@ -19,7 +18,11 @@
   },
   "homepage": "https://github.com/adyen-examples/adyen-mock-terminal-api#readme",
   "dependencies": {
+    "@types/node": "^20.11.17",
     "express": "^4.18.2",
     "express-handlebars": "^4.0.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.41.2"
   }
 }
