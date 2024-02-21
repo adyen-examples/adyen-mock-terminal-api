@@ -15,6 +15,7 @@ This application is **not** able to reject all invalid requests.
 
 Currently, the Mock terminal is used to [end-to-end test](https://github.com/adyen-examples/adyen-testing-suite/tree/main/tests/in-person-payments) our In-Person Payments Integration Examples in [**.NET**](https://github.com/adyen-examples/adyen-dotnet-online-payments/tree/main/in-person-payments-example), [**Java**](https://github.com/adyen-examples/adyen-java-spring-online-payments/tree/main/in-person-payments-example) or [**Node.js**](https://github.com/adyen-examples/adyen-node-online-payments/tree/main/in-person-payments-example).
 
+![Card Mock Terminal-API Application Demo](public/images/demo-card-terminal-api-application.gif)
 
 [![Run this application on Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/adyen-examples/adyen-mock-terminal-api)
 
