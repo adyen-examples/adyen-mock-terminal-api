@@ -19,7 +19,7 @@
   "homepage": "https://github.com/adyen-examples/adyen-mock-terminal-api#readme",
   "dependencies": {
     "@types/node": "^18.12.0",
-    "express": "^4.18.2",
+    "express": "^4.18.3",
     "express-handlebars": "^4.0.6"
   },
   "devDependencies": {
