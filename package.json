@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/adyen-examples/adyen-mock-terminal-api#readme",
   "dependencies": {
-    "@types/node": "^18.12.0",
+    "@types/node": "^20.11.26",
     "express": "^4.18.2",
     "express-handlebars": "^4.0.6"
   },
