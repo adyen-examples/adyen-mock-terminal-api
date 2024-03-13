@@ -3,6 +3,73 @@ const { userInteractionService, STATES } = require('../services/userInteractionS
 const express = require('express');
 const router = express.Router();
 
+const http = require('http');
+
+router.get("/test", async (req, res) => {
+    const postData = JSON.stringify({
+        "SaleToPOIRequest": {
+            "MessageHeader": {
+                "ProtocolVersion": "3.0",
+                "MessageClass": "Service",
+                "MessageCategory": "Payment",
+                "MessageType": "Request",
+                "ServiceID": "1234567890AB",
+                "SaleID": "SALE_ID_42",
+                "POIID": "V400m-123456789"
+            },
+            "PaymentRequest": {
+                "SaleData": {
+                    "SaleToAcquirerData": "tenderOption=ReceiptHandler",
+                    "SaleTransactionID": {
+                        "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e",
+                        "TimeStamp": "2023-06-12T12:08:36+00:00"
+                    }
+                },
+                "PaymentTransaction": {
+                    "AmountsReq": {
+                        "Currency": "EUR",
+                        "RequestedAmount": 10.99
+                    }
+                }
+            }
+        }
+    });
+
+    const options = {
+        hostname: 'localhost',
+        port: 3000,
+        path: '/sync',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(postData),
+            'X-API-Key': 'your-api-key...',
+            'User-Agent': 'Mock Terminal-API Application'
+        }
+    };
+
+    const httpRequest = http.request(options, (response) => {
+        let responseData = '';
+
+        response.on('data', (chunk) => {
+            responseData += chunk;
+        });
+
+        response.on('end', () => {
+            console.log('Response:', responseData);
+            res.send(responseData);
+        });
+    });
+
+    httpRequest.on('error', (error) => {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    });
+
+    httpRequest.write(postData);
+    httpRequest.end();
+});
+
 // Root index page.
 router.get("/", async (req, res) => {
     const data = payloadService.getPayloads();
