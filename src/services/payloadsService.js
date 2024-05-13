@@ -6,7 +6,7 @@ class PayloadsService {
         if (!PayloadsService.instance) {
             this.data = getRequestsAndResponses(path.join(__dirname, '../../public/payloads'));
         }
-        
+
         return PayloadsService.instance;
     }
 
@@ -14,16 +14,16 @@ class PayloadsService {
      * Gets the JsonObjectRequest and JsonObjectResponse.
      * Example entry: { "key", [JsonObjectRequest, JsonObjectResponse] }
      * Example entry: { "payment", [PaymentRequest, PaymentResponse] }
-     * @returns {Map<string, string[]>}
+     * @returns {Map<String, String[]>}
      */
     getPayloads() {
         return this.data;
     }
-    
+
     /**
      * Gets the request pair by prefix (key).
-     * @param {string} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
-     * @returns {string} - JsonObject.
+     * @param {String} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
+     * @returns {String} - JsonObject.
      */
     getRequestByPrefix(prefix) {
         return this.data[prefix][0];
@@ -31,8 +31,8 @@ class PayloadsService {
 
     /**
      * Gets the response by prefix (key).
-     * @param {string} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
-     * @returns {string} - JsonObject.
+     * @param {String} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
+     * @returns {String} - JsonObject.
      */
     getResponseByPrefix(prefix) {
         return this.data[prefix][1];
@@ -40,8 +40,8 @@ class PayloadsService {
 
     /**
      * Gets the request and response pair by prefix (key).
-     * @param {string} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
-     * @returns {string[]} - [JsonObject, JsonObject]
+     * @param {String} prefix - The key which stores the JsonObjectRequest and JsonObjectResponse.
+     * @returns {String[]} - [JsonObject, JsonObject]
      */
     getValueByPrefix(prefix) {
         return this.data[prefix];
@@ -50,41 +50,49 @@ class PayloadsService {
 
 /**
  * Use reflection (e.g. '/public/payloads'-folder) to load and parse the '-Request.json' and '-Response.json' objects from each directory.
- * @param {string} rootPath - The path of the directory to extract the JSONs from.
- * @returns {Map<string, string[]>} 
+ * @param {String} rootPath - The path of the directory to extract the JSONs from.
+ * @returns {Map<String, String[]>}
  */
 function getRequestsAndResponses(rootPath) {
-    const map = {};
+    let map = {};
     const root = fs.readdirSync(rootPath);
+    const encoding = 'utf-8';
 
     root.forEach(file => {
-       const filePath = path.join(rootPath, file); 
-       const stat = fs.statSync(filePath);
-       
-       if (stat.isDirectory()) {
-           const files = fs.readdirSync(filePath);
+        const filePath = path.join(rootPath, file);
+        const stat = fs.statSync(filePath);
 
-           // Find `Request.json` and `Response.json` files.
-           const requestFile = files.find(f => f.endsWith('Request.json'));
-           const responseFile = files.find(f => f.endsWith('Response.json'));
-           
-           // Parse (optional) `Request.json`.
-           let requestJson = null;
-           if (requestFile) {
-               const requestFilePath = path.join(filePath, requestFile);
-               requestJson = JSON.parse(fs.readFileSync(requestFilePath, 'utf8'));
-           }
-           
-           // Parse (mandatory) `Response.json`.
-           const responseFilePath = path.join(filePath, responseFile);
-           const responseJson = JSON.parse(fs.readFileSync(responseFilePath, 'utf8'));
+        if (stat.isDirectory()) {
+            const files = fs.readdirSync(filePath);
+            const responseFiles = files.filter(file => file.endsWith('Response.json'));
 
-           // Default - Insert into our map: { "payment", [PaymentRequestJson, PaymentResponseJson] }
-           // If no `Request.json` is found (f.e. for `paymentBusy`), insert only the response into our map: { "paymentBusy", [null, PaymentBusyResponseJson] }
-           map[file] = [requestJson, responseJson];
-       }
+            // Retrieve the `*Request.json` and `*Response.json` files and return them as an array of objects.
+            const pairs = responseFiles.map(responseFile => {
+                // Prefix, e.g. filename "paymentResponse.json" returns "payment".
+                const prefix = path.basename(responseFile, 'Response.json');
+
+                // Find the respective `*Request,json` pair for `*Response.json` if any.
+                const requestFile = files.find(file => file === prefix + 'Request.json');
+
+                return (
+                    {
+                        prefix: prefix,
+                        requestFileName: requestFile ? requestFile : null,
+                        requestJson: requestFile ? JSON.parse(fs.readFileSync(path.join(filePath, requestFile), encoding)) : null,
+                        responseFileName: responseFile,
+                        responseJson: JSON.parse(fs.readFileSync(path.join(filePath, responseFile), encoding))
+                    }
+                );
+            });
+
+            // Default - Insert into our map: { "payment", [PaymentRequestJson, PaymentResponseJson] }
+            // If no `Request.json` is found (f.e. for `paymentBusy`), insert only the response into our map: { "paymentBusy", [null, PaymentBusyResponseJson] }
+            pairs.forEach(pair => {
+                map[pair.prefix] = [pair.requestJson, pair.responseJson]
+            });
+        }
     });
-    
+
     console.info("Found " + Object.keys(map).length + " mock payloads.")
 
     return map;

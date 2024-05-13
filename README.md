@@ -1,11 +1,25 @@
 > [!IMPORTANT]
-> This mock application is currently in its alpha-release and is not supporting every request and response. This application is **not** able to reject all invalid requests.
->
-> We currently support the following [Terminal API requests](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/):
-> - [PaymentRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentrequest) | [PaymentResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) |  [PaymentBusyResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) 
-> - [ReversalRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalrequest) | [ReversalResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalresponse)
-> - [AbortRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoabortrequest)
-> - [TransactionStatusRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusrequest)  | [TransactionStatusResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusresponse)
+> This mock application is currently in its alpha-release and is not supporting every request and response. This application **cannot** reject all invalid requests.
+> **Always test** your own request and responses on a physical terminal beforehand. The following mock payloads were constructed using a V400M-terminal device (card inserted & pin entered, no tap).
+
+> We currently support the following [Terminal API requests/responses](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/) below.
+- [PaymentRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentrequest) & [PaymentResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse)
+- [PaymentBusyResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexopaymentresponse) 
+- [ReversalRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalrequest) & [ReversalResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoreversalresponse)
+- [AbortRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexoabortrequest)
+- [TransactionStatusRequest](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusrequest) & [TransactionStatusResponse](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/terminal-api-reference/#comadyennexotransactionstatusresponse)
+
+> We currently support the following [Payment Refusal Codes](https://docs.adyen.com/point-of-sale/testing-pos-payments/test-card-v1/#testing-declines) below.
+
+| Amount ending in | Result       | Error Condition | Refusal Reason         | Message                                                                                                                                            |
+|-----------------:|--------------|-----------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+|              124 | Failure      | Refusal         | 210 Not enough balance | NOT_ENOUGH_BALANCE                                                                                                                                 |
+|              125 | Failure      | Refusal         | 199 Card blocked       | BLOCK_CARD                                                                                                                                         |
+|              126 | Failure      | Refusal         | 228 Card expired       | CARD_EXPIRED                                                                                                                                       |
+|              127 | Failure      | Refusal         | 214 Declined online    | INVALID_AMOUNT                                                                                                                                     |
+|              128 | Failure      | InvalidCard     | 214 Declined online    | INVALID_CARD                                                                                                                                       |
+|              134 | Failure      | WrongPIN        | 129 Invalid online PIN | INVALID_PIN - **Remark:** The terminal shows "Incorrect PIN" and then "Enter PIN". Cancel the payment on the terminal to get the failure response. |
+
 
 
 # Adyen Mock Terminal-API Application
@@ -45,7 +59,7 @@ Visit [http://localhost:3000/](http://localhost:3000/) to see the mock Terminal 
 
 There are two ways in which you can use the application.
 
-1. We recommend to clone on of our our In-Person Payment Integration examples in [**.NET**](https://github.com/adyen-examples/adyen-dotnet-online-payments/tree/main/in-person-payments-example), [**Java**](https://github.com/adyen-examples/adyen-java-spring-online-payments/tree/main/in-person-payments-example) or [**Node.js**](https://github.com/adyen-examples/adyen-node-online-payments/tree/main/in-person-payments-example).
+1. We recommend to clone one of our In-Person Payment Integration examples in [**.NET**](https://github.com/adyen-examples/adyen-dotnet-online-payments/tree/main/in-person-payments-example), [**Java**](https://github.com/adyen-examples/adyen-java-spring-online-payments/tree/main/in-person-payments-example) or [**Node.js**](https://github.com/adyen-examples/adyen-node-online-payments/tree/main/in-person-payments-example).
 
 Once you've cloned the example, you can point the application to use `http://localhost:3000`, this configurable by overriding the `CloudApiEndpoint` URI. Now your application is ready to communicate to the terminal
 
@@ -72,15 +86,17 @@ We commit all our new features directly into our GitHub repository. Feel free to
 ### Example: Add your own mock request/response payload
 
 1. Fork this repository and create a new branch.
-2. The example below adds `paymentRequest.json` and `paymentResponse.json` (prefixed by `payment`). The `src/routes/services/payloadService` will automatically add this payload if the JSON is valid.
+2. The example below adds `paymentRequest.json` and `paymentResponse.json`. The `src/routes/services/payloadService` will automatically load these files, if it's suffixed with `*Request`/`*Response` **and** if the JSON is valid.
+   - Create a new folder, in this example we use the existing **{payment}**-folder.
    - Add your `Request` to `/public/payloads/**{payment}**/paymentRequest
    - Add your `Response` to `/public/payloads/**{payment}**/paymentResponse
-   - Note: Every `-Request` should have a `-Response`. Except for those that require some kind of (state) logic (f.e. "paymentBusyResponse" triggers when a payment request is in-progress).
-3. In `/src/routes/defaultRoutes.js`, find the `/sync`-endpoint and the following code snippet:
+   - **Note:** Every `*Request` should have a `*Response`, except for those that require some kind of state or logic (f.e: "paymentBusyResponse" triggers when a payment request is in-progress).
+   - **Note 2:** Keep naming-conventions camelCased and prefixed with its root-folder. Example: if the root-folder is located in `/payloads/example`, we name the jsons accordingly: `exampleRequest.json`/`exampleResponse.json`. 
+3. In `/src/routes/defaultRoutes.js`, find the `/sync`-endpoint and add the logic needed to trigger your added request-and-response.
 
 ```js
 if (req.body.SaleToPOIRequest.PaymentRequest) {
-    sendResponse(res, "payment");
+    sendOKResponse(res, "payment");
     return;
 }
 ```

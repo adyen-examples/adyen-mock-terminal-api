@@ -12,7 +12,7 @@ class UserInteractionService {
             this.pin = "";
             this.isConfirmed = false;
         }
-        
+
         return UserInteractionService.instance;
     }
 
@@ -20,20 +20,20 @@ class UserInteractionService {
      * Get the state of the terminal.
      * @returns {STATES} - String.
      */
-     getState() {
+    getState() {
         return this.state;
     }
 
     /**
      * Set the state of the terminal.
-     * @param {STATES state} - State of the terminal.
+     * @param {STATES} state - State of the terminal.
      */
     setState(state) {
         if (this.state === state) {
             console.info("State remains unchanged.");
             return;
         }
-        
+
         this.clearPin();
         this.setIsConfirmed(false);
         this.state = state;
@@ -50,13 +50,13 @@ class UserInteractionService {
 
     /**
      * Set the last response returned by the terminal.
-     * @param {JsonObject lastResponse} JsonObject
+     * @param {JsonObject} lastResponse JsonObject
      */
-    setLastResponse(response) {
-        this.lastResponse = response;
+    setLastResponse(lastResponse) {
+        this.lastResponse = lastResponse;
         console.info("Last response is set to: " + JSON.stringify(this.lastResponse, null, 2));
     }
-    
+
     /**
      * Get the last request returned by the terminal.
      * @returns {JsonObject} - JsonObject.
@@ -66,11 +66,11 @@ class UserInteractionService {
     }
 
     /**
-     * Sets the last response returned by the terminal.
-     * @param {JsonObject request} - JsonObject
+     * Sets the last request returned by the terminal.
+     * @param {JsonObject} lastRequest - JsonObject
      */
-    setLastRequest(request) {
-        this.lastRequest = request;
+    setLastRequest(lastRequest) {
+        this.lastRequest = lastRequest;
         console.info("Last request is set to: " + JSON.stringify(this.lastRequest, null, 2));
     }
 
@@ -84,30 +84,30 @@ class UserInteractionService {
 
     /**
      * Gets the pin-code.
-     * @returns {string pin} - Pin-code.
+     * @returns {String} - Pin-code.
      */
     getPin() {
         return this.pin;
     }
-    
+
     /**
      * Sets the pin-code.
-     * @param {string pin} - Pin-code.
+     * @param {String} pin - Pin-code.
      */
     setPin(pin) {
         this.pin = pin;
     }
-    
+
     /**
      * Removes the pin-code.
      */
     clearPin() {
         this.pin = "";
     }
-    
+
     /**
      * Returns true when the green confirm-button is pressed on the terminal.
-     * @returns {boolean} - True when the confirm-button has been pressed.
+     * @returns {Boolean} - True when the confirm-button has been pressed.
      */
     getIsConfirmed() {
         return this.isConfirmed;
@@ -115,7 +115,7 @@ class UserInteractionService {
 
     /**
      * Set to true when to green confirm-button is pressed on the terminal.
-     * @param {boolean isConfirmed} - True when the confirm-button has been pressed.
+     * @param {Boolean} isConfirmed - Set to true when the confirm-button has been pressed.
      */
     setIsConfirmed(isConfirmed) {
         this.isConfirmed = isConfirmed;
@@ -123,4 +123,4 @@ class UserInteractionService {
 }
 
 const userInteractionService = new UserInteractionService();
-module.exports = { userInteractionService, STATES: userInteractionService.STATES };
+module.exports = {userInteractionService, STATES: userInteractionService.STATES};

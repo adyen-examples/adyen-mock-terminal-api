@@ -1,0 +1,63 @@
+{
+  "SaleToPOIResponse": {
+    "MessageHeader": {
+      "MessageCategory": "Payment",
+      "MessageClass": "Service",
+      "MessageType": "Response",
+      "POIID": "V400m-123456789",
+      "ProtocolVersion": "3.0",
+      "SaleID": "SALE_ID_42",
+      "ServiceID": "1234567890AB"
+    },
+    "PaymentResponse": {
+      "POIData": {
+        "POIReconciliationID": "1000",
+        "POITransactionID": {
+          "TimeStamp": "2024-05-13T21:22:22.652Z",
+          "TransactionID": "v4W5001715635342007.ZF6647432G2LWPT5"
+        }
+      },
+      "PaymentReceipt": [],
+      "PaymentResult": {
+        "AuthenticationMethod": [
+          "OfflinePIN"
+        ],
+        "OnlineFlag": true,
+        "PaymentAcquirerData": {
+          "AcquirerPOIID": "V400m-123456789",
+          "AcquirerTransactionID": {
+            "TimeStamp": "2024-05-13T21:22:22.652Z",
+            "TransactionID": "ZF6647432G2LWPT5"
+          },
+          "MerchantID": "ADYEN_MERCHANT_ACCOUNT"
+        },
+        "PaymentInstrumentData": {
+          "CardData": {
+            "CardCountryCode": "528",
+            "EntryMode": [
+              "ICC"
+            ],
+            "MaskedPan": "600007 **** 7003",
+            "PaymentBrand": "maestro",
+            "SensitiveCardData": {
+              "CardSeqNumb": "23",
+              "ExpiryDate": "0330"
+            }
+          },
+          "PaymentInstrumentType": "Card"
+        }
+      },
+      "Response": {
+        "AdditionalResponse": "...",
+        "ErrorCondition": "Refusal",
+        "Result": "Failure"
+      },
+      "SaleData": {
+        "SaleTransactionID": {
+          "TimeStamp": "2024-05-13T21:22:22.235Z",
+          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+        }
+      }
+    }
+  }
+}

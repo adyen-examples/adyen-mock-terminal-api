@@ -18,7 +18,7 @@ app.engine("hbs", handlebars({
             toUpperCase: function (string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             },
-            isEqual: function(stringA, stringB) {
+            isEqual: function (stringA, stringB) {
                 return stringA === stringB;
             }
         }

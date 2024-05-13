@@ -1,11 +1,11 @@
 /**
-    Helper functions that allow us to highlight elements within the page.
-**/
+ Helper functions that allow us to highlight elements within the page.
+ **/
 
 
 async function addIndicator(elementId, delayInMilliseconds = 0) {
     await new Promise(resolve => setTimeout(resolve, delayInMilliseconds));
-    
+
     const element = document.getElementById(elementId);
     if (!element.classList.contains("indicator-highlight-start")) {
         element.classList.add("indicator-highlight-start");

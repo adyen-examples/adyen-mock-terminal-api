@@ -1,0 +1,28 @@
+{
+  "SaleToPOIRequest": {
+    "MessageHeader": {
+      "MessageCategory": "Payment",
+      "MessageClass": "Service",
+      "MessageType": "Request",
+      "POIID": "V400m-123456789",
+      "ProtocolVersion": "3.0",
+      "SaleID": "SALE_ID_42",
+      "ServiceID": "1234567890AB"
+    },
+    "PaymentRequest": {
+      "SaleData": {
+        "SaleToAcquirerData": "tenderOption=ReceiptHandler",
+        "SaleTransactionID": {
+          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e",
+          "TimeStamp": "2023-06-12T12:08:36+00:00"
+        }
+      },
+      "PaymentTransaction": {
+        "AmountsReq": {
+          "Currency": "EUR",
+          "RequestedAmount": 11.27
+        }
+      }
+    }
+  }
+}
