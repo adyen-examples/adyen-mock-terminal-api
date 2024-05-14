@@ -48,7 +48,7 @@
         }
       },
       "Response": {
-        "AdditionalResponse": "...",
+        "AdditionalResponse": "message=INVALID_AMOUNT&refusalReason=214%20Declined%20online",
         "ErrorCondition": "Refusal",
         "Result": "Failure"
       },

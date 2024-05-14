@@ -48,7 +48,7 @@
         }
       },
       "Response": {
-        "AdditionalResponse": "...",
+        "AdditionalResponse": "message=CARD_EXPIRED&refusalReason=228%20Card%20expired",
         "ErrorCondition": "Refusal",
         "Result": "Failure"
       },

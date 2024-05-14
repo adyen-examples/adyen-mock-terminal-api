@@ -48,7 +48,7 @@
         }
       },
       "Response": {
-        "AdditionalResponse": "...",
+        "AdditionalResponse": "message=NOT_ENOUGH_BALANCE&refusalReason=210%20Not%20enough%20balance",
         "ErrorCondition": "Refusal",
         "Result": "Failure"
       },

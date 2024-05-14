@@ -20,7 +20,7 @@
       "PaymentTransaction": {
         "AmountsReq": {
           "Currency": "EUR",
-          "RequestedAmount": 11.25
+          "RequestedAmount": 1.25
         }
       }
     }

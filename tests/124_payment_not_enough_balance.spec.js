@@ -15,4 +15,5 @@ test('124 Payment - Not Enough Balance', async ({ page }) => {
   await expect(page.locator('text=/PaymentRequest/')).toBeVisible();
   await expect(page.locator('text=/PaymentResponse/')).toBeVisible();
   await expect(page.locator('text=/"Refusal"/')).toBeVisible();
+  await expect(page.locator('text=/NOT_ENOUGH_BALANCE/')).toBeVisible();
 });

@@ -15,4 +15,5 @@ test('128 Payment - Invalid Card', async ({ page }) => {
   await expect(page.locator('text=/PaymentRequest/')).toBeVisible();
   await expect(page.locator('text=/PaymentResponse/')).toBeVisible();
   await expect(page.locator('text=/"InvalidCard"/')).toBeVisible();
+  await expect(page.locator('text=/INVALID_CARD/')).toBeVisible();
 });

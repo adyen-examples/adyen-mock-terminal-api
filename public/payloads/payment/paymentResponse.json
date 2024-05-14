@@ -19,7 +19,7 @@
       "PaymentReceipt": [],
       "PaymentResult": {
         "AmountsResp": {
-          "AuthorizedAmount": 10.99,
+          "AuthorizedAmount": 1.00,
           "Currency": "EUR"
         },
         "PaymentAcquirerData": {

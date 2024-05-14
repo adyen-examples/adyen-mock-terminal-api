@@ -47,7 +47,7 @@
         }
       },
       "Response": {
-        "AdditionalResponse": "...",
+        "AdditionalResponse": "message=INVALID_PIN&refusalReason=129%20Invalid%20online%20PIN",
         "ErrorCondition": "WrongPIN",
         "Result": "Failure"
       },
