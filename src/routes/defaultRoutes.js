@@ -9,7 +9,7 @@ const paymentFailureMap = {
     "126": "126_paymentCardExpired",
     "127": "127_paymentInvalidAmount",
     "128": "128_paymentInvalidCard",
-    "134": "134_paymentInvalidPin"
+    "134": "134_paymentWrongPin"
 };
 
 // Root index page.
