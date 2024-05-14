@@ -1,12 +1,13 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-test('Notification - Invalid JsonObject', async ({ page }) => {
+test('Notification - Invalid JsonObject', async ({ request }) => {
   const response = await request.post(`/sync`, {
     data: {
-      body: 'invalid-json',
+      body: 'invalid-json'
     }
   });
+  
   await expect(response.ok()).toBeTruthy();
   
   const json = await response.json();
