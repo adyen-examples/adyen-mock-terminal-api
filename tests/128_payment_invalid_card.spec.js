@@ -2,10 +2,10 @@
 const { test, expect } = require('@playwright/test');
 const utilities = require('./utilities');
 
-test('Mock Terminal Test', async ({ page }) => {
+test('128 Payment - Invalid Card', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('').selectOption('124_paymentNotEnoughBalance');
+  await page.getByLabel('').selectOption('128_paymentInvalidCard');
 
   await page.getByRole('button', { name: 'Clear' }).click();
   await page.getByRole('button', { name: 'Send' }).click();
@@ -14,5 +14,5 @@ test('Mock Terminal Test', async ({ page }) => {
 
   await expect(page.locator('text=/PaymentRequest/')).toBeVisible();
   await expect(page.locator('text=/PaymentResponse/')).toBeVisible();
-  await expect(page.locator('text=/"Refusal"/')).toBeVisible();
+  await expect(page.locator('text=/"InvalidCard"/')).toBeVisible();
 });
