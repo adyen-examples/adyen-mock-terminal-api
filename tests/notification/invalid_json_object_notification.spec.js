@@ -2,10 +2,8 @@
 const { test, expect } = require('@playwright/test');
 
 test('Notification - Invalid JsonObject', async ({ request }) => {
-  const response = await request.post(`/sync`, {
-    data: {
-      body: 'invalid-json'
-    }
+  const response = await request.post('/sync', {
+    data: 'invalid-json'
   });
   
   await expect(response.ok()).toBeTruthy();
