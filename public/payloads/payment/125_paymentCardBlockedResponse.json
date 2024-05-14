@@ -24,7 +24,7 @@
         ],
         "OnlineFlag": true,
         "PaymentAcquirerData": {
-          "AcquirerPOIID": "S1F2-000158213602061",
+          "AcquirerPOIID": "V400m-123456789",
           "AcquirerTransactionID": {
             "TimeStamp": "2024-05-13T21:08:45.752Z",
             "TransactionID": "MGX7GX332G2LWPT5"
