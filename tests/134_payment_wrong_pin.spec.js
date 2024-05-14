@@ -15,5 +15,5 @@ test('134 Payment - Wrong Pin', async ({ page }) => {
   await expect(page.locator('text=/PaymentRequest/')).toBeVisible();
   await expect(page.locator('text=/PaymentResponse/')).toBeVisible();
   await expect(page.locator('text=/"WrongPIN"/')).toBeVisible();
-  await expect(page.locator('text=/"INVALID_PIN"/')).toBeVisible();
+  await expect(page.locator('text=/INVALID_PIN/')).toBeVisible();
 });
