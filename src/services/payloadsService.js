@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Traverses the `/public/payloads`-folder and parse the respective `*Request` and `*Response`-pairs as JSON Objects.
+ */
 class PayloadsService {
     constructor() {
         if (!PayloadsService.instance) {

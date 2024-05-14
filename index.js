@@ -3,11 +3,25 @@ const handlebars = require('express-handlebars');
 const path = require('path');
 const defaultRoutes = require('./src/routes/defaultRoutes');
 const userInteractionRoutes = require('./src/routes/userInteractionRoutes');
+const payloadService = require('./src/services/payloadsService')
+const { userInteractionService } = require("./src/services/userInteractionService");
 
 const port = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
+app.use((err, req, res, next) => {
+    // Return a invalidJsonObject response when `express.json()` throws an error.
+    if (err instanceof SyntaxError) {
+        const invalidJsonObjectResponse = payloadService.getResponseByPrefix("invalidJsonObjectNotification");
+        userInteractionService.setLastResponse(invalidJsonObjectResponse);
+        res.status(200).send(invalidJsonObjectResponse);
+        return;
+    }
+    
+    next(err);
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.engine("hbs", handlebars({

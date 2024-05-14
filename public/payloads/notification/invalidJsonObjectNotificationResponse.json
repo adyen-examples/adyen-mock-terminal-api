@@ -1,0 +1,19 @@
+{
+  "SaleToPOIRequest": {
+    "MessageHeader": {
+      "DeviceID": "582976680",
+      "MessageCategory": "Event",
+      "MessageClass": "Event",
+      "MessageType": "Notification",
+      "POIID": "N/A",
+      "ProtocolVersion": "3.0",
+      "SaleID": "N/A"
+    },
+    "EventNotification": {
+      "RejectedMessage": "MDI4OTNmeTBmMjM4aGc=",
+      "EventToNotify": "Reject",
+      "TimeStamp": "2024-05-14T13:26:21.209Z",
+      "EventDetails": "message=Input+is+not+a+JSONObject"
+    }
+  }
+}

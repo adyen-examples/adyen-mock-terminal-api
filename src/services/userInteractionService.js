@@ -1,3 +1,6 @@
+/**
+ * Handles UI interactions with the terminal (f.e. when entering pin).
+ */
 class UserInteractionService {
     constructor() {
         if (!UserInteractionService.instance) {

@@ -1,16 +1,8 @@
 const payloadService = require('../services/payloadsService');
 const { userInteractionService, STATES } = require('../services/userInteractionService');
+const paymentService = require('../services/payloads/paymentService');
 const express = require('express');
 const router = express.Router();
-
-const paymentFailureMap = {
-    "124": "124_paymentNotEnoughBalance",
-    "125": "125_paymentCardBlocked",
-    "126": "126_paymentCardExpired",
-    "127": "127_paymentInvalidAmount",
-    "128": "128_paymentInvalidCard",
-    "134": "134_paymentWrongPin"
-};
 
 // Root index page.
 router.get("/", async (req, res) => {
@@ -31,7 +23,7 @@ router.post("/sync", async (req, res) => {
     console.info("Incoming /sync request ...");
     userInteractionService.setLastRequest(req.body);
     userInteractionService.setLastResponse({});
-
+    
     try {
         // Handle abort request.
         if (req.body.SaleToPOIRequest.AbortRequest) {
@@ -47,34 +39,9 @@ router.post("/sync", async (req, res) => {
         }
 
         // Handle payment request.
-        if (req.body.SaleToPOIRequest.PaymentRequest) {
-            // Set terminal to busy and start handling logic.
-            userInteractionService.setState(STATES.BUSY);
-
-            // Wait for the confirm button if a payment request is sent.
-            const isPinEntered = await getPinResultAsync();
-            userInteractionService.setState(STATES.READY);
-
-            if (isPinEntered) {
-                const amount = req.body.SaleToPOIRequest.PaymentRequest.PaymentTransaction.AmountsReq.RequestedAmount;
-                const lastThreeDigits = amount.toString()
-                    .replace('.', '')
-                    .padStart(3, '0')
-                    .slice(-3);
-                
-                // Look up error code from payment failure.
-                const paymentFailure = paymentFailureMap[lastThreeDigits];
-
-                if (paymentFailure) {
-                    sendOKResponse(res, paymentFailure);
-                    return;
-                }
-                
-                sendOKResponse(res, "payment");
-                return;
-            }
-
-            res.status(200).send({});
+        if (paymentService.containsPrefix(req)) {
+            const paymentResponse = await paymentService.getResponse(req);
+            sendOKResponse(res, paymentResponse);
             return;
         }
 
@@ -102,44 +69,17 @@ router.post("/sync", async (req, res) => {
 
 /**
  * Helper function that returns a 200 response for given `prefix` key.
+ * If {} is provided as prefix, we skip the look-up and return {}.
  */
 function sendOKResponse(res, prefix) {
+    if (prefix === {}) {
+        res.status(200).send({})
+        return;
+    }
+    
     const response = payloadService.getResponseByPrefix(prefix);
     userInteractionService.setLastResponse(response);
     res.status(200).send(response);
 }
-
-
-/**
- * Blocking call that waits until user has entered the pin. Returns a boolean if successful.
- * @returns True, when pin is entered - False, when request is cancelled/time-out.
- */
-const getPinResultAsync = async () => {
-    return new Promise(async resolve => {
-        let totalSeconds = 180;
-        const waitForPinResult = () => {
-            if (userInteractionService.getIsConfirmed() === true) {
-                // Pin code entered, accept any pin for now.
-                console.info("Confirm-button is pressed.");
-                resolve(true);
-            } else if (userInteractionService.getState() === STATES.READY) {
-                // State changed, f.e. red `cancel-button` is pressed.
-                console.info("Cancelled entering-pin by user.");
-                resolve(false);
-            } else if (totalSeconds > 0) {
-                // Waiting `totalSeconds` for user to enter pin...
-                console.info("Waiting for pin input... " + totalSeconds);
-                totalSeconds--;
-                setTimeout(waitForPinResult, 1000);
-            } else {
-                // Time out.
-                console.info("Request has timed-out.");
-                resolve(false);
-            }
-        };
-
-        waitForPinResult();
-    });
-};
 
 module.exports = router;
