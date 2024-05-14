@@ -1,6 +1,6 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-const utilities = require('./utilities');
+const utilities = require('../utilities');
 
 test('126 Payment - Card Expired', async ({ page }) => {
   await page.goto('/');
