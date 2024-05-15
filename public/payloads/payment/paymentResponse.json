@@ -19,11 +19,11 @@
       "PaymentReceipt": [],
       "PaymentResult": {
         "AmountsResp": {
-          "AuthorizedAmount": 10.99,
+          "AuthorizedAmount": 1.00,
           "Currency": "EUR"
         },
         "PaymentAcquirerData": {
-          "MerchantID": "YOUR_MERCHANT_ACCOUNT",
+          "MerchantID": "ADYEN_MERCHANT_ACCOUNT",
           "AcquirerPOIID": "V400m-123456789"
         },
         "PaymentInstrumentData": {

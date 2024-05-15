@@ -1,0 +1,63 @@
+{
+  "SaleToPOIResponse": {
+    "MessageHeader": {
+      "MessageCategory": "Payment",
+      "MessageClass": "Service",
+      "MessageType": "Response",
+      "POIID": "V400m-123456789",
+      "ProtocolVersion": "3.0",
+      "SaleID": "SALE_ID_42",
+      "ServiceID": "1234567890AB"
+    },
+    "PaymentResponse": {
+      "POIData": {
+        "POIReconciliationID": "1000",
+        "POITransactionID": {
+          "TimeStamp": "2024-05-13T21:08:45.752Z",
+          "TransactionID": "v4W5001715634525005.MGX7GX332G2LWPT5"
+        }
+      },
+      "PaymentReceipt": [],
+      "PaymentResult": {
+        "AuthenticationMethod": [
+          "OfflinePIN"
+        ],
+        "OnlineFlag": true,
+        "PaymentAcquirerData": {
+          "AcquirerPOIID": "V400m-123456789",
+          "AcquirerTransactionID": {
+            "TimeStamp": "2024-05-13T21:08:45.752Z",
+            "TransactionID": "MGX7GX332G2LWPT5"
+          },
+          "MerchantID": "ADYEN_MERCHANT_ACCOUNT"
+        },
+        "PaymentInstrumentData": {
+          "CardData": {
+            "CardCountryCode": "528",
+            "EntryMode": [
+              "ICC"
+            ],
+            "MaskedPan": "600007 **** 7003",
+            "PaymentBrand": "maestro",
+            "SensitiveCardData": {
+              "CardSeqNumb": "23",
+              "ExpiryDate": "0330"
+            }
+          },
+          "PaymentInstrumentType": "Card"
+        }
+      },
+      "Response": {
+        "AdditionalResponse": "message=BLOCK_CARD&refusalReason=199%20Card%20blocked",
+        "ErrorCondition": "Refusal",
+        "Result": "Failure"
+      },
+      "SaleData": {
+        "SaleTransactionID": {
+          "TimeStamp": "2024-05-13T21:08:44.650Z",
+          "TransactionID": "21f1268f-9126-4bce-b127-9c2d5ffa024e"
+        }
+      }
+    }
+  }
+}

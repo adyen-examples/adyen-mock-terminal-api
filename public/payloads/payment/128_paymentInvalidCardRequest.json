@@ -1,13 +1,13 @@
 {
   "SaleToPOIRequest": {
     "MessageHeader": {
-      "ProtocolVersion": "3.0",
-      "MessageClass": "Service",
       "MessageCategory": "Payment",
+      "MessageClass": "Service",
       "MessageType": "Request",
-      "ServiceID": "1234567890AB",
+      "POIID": "V400m-123456789",
+      "ProtocolVersion": "3.0",
       "SaleID": "SALE_ID_42",
-      "POIID": "V400m-123456789"
+      "ServiceID": "1234567890AB"
     },
     "PaymentRequest": {
       "SaleData": {
@@ -20,7 +20,7 @@
       "PaymentTransaction": {
         "AmountsReq": {
           "Currency": "EUR",
-          "RequestedAmount": 1.00
+          "RequestedAmount": 1.28
         }
       }
     }

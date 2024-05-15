@@ -1,6 +1,6 @@
 /**
-    Handles polling & highlighting of the request/response code blocks.
-**/
+ Handles polling & highlighting of the request/response code blocks.
+ **/
 
 async function sendRequestButtonOnClick() {
     try {
@@ -16,7 +16,7 @@ async function sendRequestButtonOnClick() {
         // Send the request to the sync endpoint.
         const response = await sendPostRequest("/sync", requestToSend);
         updateResponseCodeblock(response);
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -26,7 +26,7 @@ async function clearCodeblockButtonOnClick() {
         const result = await sendPostRequest("/user-interaction/clear-codeblocks-button");
         updateRequestCodeblock(result);
         updateResponseCodeblock(result);
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -51,11 +51,11 @@ function updateResponseCodeblock(response) {
     if (responseElement.textContent === jsonResponse) {
         return;  // Only update the JsonResponse element when there are changes.
     }
-    
+
     if (responseElement.hasAttribute('data-highlighted')) {
         responseElement.removeAttribute('data-highlighted');
     }
-    
+
     responseElement.textContent = jsonResponse;
     hljs.highlightElement(document.getElementById('json-responses'));
 }

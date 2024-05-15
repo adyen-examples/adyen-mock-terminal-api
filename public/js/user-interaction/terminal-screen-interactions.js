@@ -1,6 +1,6 @@
 /**
-    Handles anything that happens on the terminal, e.g. pin, buttons, screen text etc.
-**/
+ Handles user-interactions that happens on the terminal, e.g. pin, buttons, screen text etc.
+ **/
 
 
 function getScreenPinElement() {
@@ -32,6 +32,7 @@ function updateScreenText(text) {
 }
 
 let currentState = "READY";
+
 function updateState(response) {
     if (response.state === "BUSY") { // Pin.
         if (getScreenPinElement().classList.contains("hidden")) {
@@ -65,7 +66,7 @@ function bindAllTerminalButtons() {
                 if (response && Object.keys(response).length > 0) {
                     updatePin(response.pin);
                 }
-            } catch(e) {
+            } catch (e) {
                 console.error(e);
             }
         });
@@ -77,12 +78,12 @@ function bindAllTerminalButtons() {
         if (!isAllowedToEnterPin()) {
             return;
         }
-        
+
         if (getScreenPinElement().textContent.length < 4) {
             updateScreenText("Invalid pin, must be 4-digits, enter pin again:");
             return;
         }
-    
+
         await sendPostRequest("/user-interaction/confirm-button");
     });
 

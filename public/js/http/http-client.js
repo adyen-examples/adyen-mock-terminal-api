@@ -1,6 +1,6 @@
 /**
-    Collection of helper functions that allow you to send GET/POST requests or poll endpoints.
-**/
+ Collection of helper functions that allow you to send GET/POST requests or poll endpoints.
+ **/
 
 async function sendGetRequest(url) {
     const res = await fetch(url, {
@@ -22,7 +22,7 @@ async function sendPostRequest(url, data) {
             "Keep-Alive": "timeout=180, max=180"
         },
     });
-    
+
     return res.json();
 }
 
@@ -31,7 +31,7 @@ async function pollEndpoint(endpoint, callback, milliseconds = 400) {
 
     async function poll() {
         try {
-            const response = await sendGetRequest(endpoint);            
+            const response = await sendGetRequest(endpoint);
             callback(response);
         } catch (error) {
             console.error(error);

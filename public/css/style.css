@@ -26,7 +26,7 @@ body {
 /* Sections start */
 .trigger-request-section {
     display: flex;
-    width: 860px;
+    width: 1200px;
     padding: 0 32px;
 }
 
@@ -38,7 +38,7 @@ body {
 
 .terminal-section {
     display: inline-grid;
-    margin: 0 96px;
+    margin: 0 128px;
     width: 360px;
     padding-bottom: 16px;
 }
