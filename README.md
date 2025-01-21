@@ -12,8 +12,7 @@ Currently, we use the Mock Terminal-API Application to [end-to-end test](https:/
 ![Demo Card Mock Terminal-API Application](public/images/demo-card-mock-terminal-api-application.gif)
 
 [![Run this application on Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/adyen-examples/adyen-mock-terminal-api)
-
-## Supported Requests/Responses
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/adyen-examples/adyen-mock-terminal-api)
 
 ### Basics
 We currently support the following [Terminal API requests/responses](https://docs.adyen.com/point-of-sale/design-your-integration/terminal-api/) below.
