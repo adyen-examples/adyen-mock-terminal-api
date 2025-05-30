@@ -28,7 +28,7 @@ router.post("/sync", async (req, res) => {
         // Handle abort request.
         if (req.body.SaleToPOIRequest.AbortRequest) {
             userInteractionService.setState(STATES.READY);
-            sendOKResponse(res, "abortPayment");
+            res.status(200).send({});
             return;
         }
 
