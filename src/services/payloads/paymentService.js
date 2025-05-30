@@ -29,10 +29,10 @@ class PaymentService {
         userInteractionService.setState(STATES.BUSY);
 
         // Wait for the confirm button if a payment request is sent.
-        const isPinEntered = await this.getPinResultAsync();
+        const pinResult = await this.getPinResultAsync();
         userInteractionService.setState(STATES.READY);
 
-        if (isPinEntered) {
+        if ("confirm" === pinResult) {
             const amount = request.body.SaleToPOIRequest.PaymentRequest.PaymentTransaction.AmountsReq.RequestedAmount;
             const lastThreeDigits = amount.toString()
                 .replace('.', '')
@@ -49,13 +49,13 @@ class PaymentService {
             return "payment";
         }
 
-        return {};
+        return pinResult;
     }
 
 
     /**
      * Blocking call that waits until user has entered the pin. Returns a boolean if successful.
-     * @returns True, when pin is entered - False, when request is cancelled/time-out.
+     * @returns "confirm", when pin is entered - "cancel" / "timeout", when request is cancelled/time-out.
      */
     getPinResultAsync = async () => {
         return new Promise(async resolve => {
@@ -64,11 +64,15 @@ class PaymentService {
                 if (userInteractionService.getIsConfirmed() === true) {
                     // Pin code entered, accept any pin for now.
                     console.info("Confirm-button is pressed.");
-                    resolve(true);
-                } else if (userInteractionService.getState() === STATES.READY) {
-                    // State changed, f.e. red `cancel-button` is pressed.
+                    resolve("confirm");
+                } else if (userInteractionService.getIsCancelled() === true) {
+                    // red cancel-button is pressed.
                     console.info("Cancelled entering-pin by user.");
-                    resolve(false);
+                    resolve("cancel");
+                } else if (userInteractionService.getState() === STATES.READY) {
+                    // State changed due to abort request.
+                    console.info("Aborted payment via API.");
+                    resolve("abortPayment");
                 } else if (totalSeconds > 0) {
                     // Waiting `totalSeconds` for user to enter pin...
                     console.info("Waiting for pin input... " + totalSeconds);
@@ -77,7 +81,7 @@ class PaymentService {
                 } else {
                     // Time out.
                     console.info("Request has timed-out.");
-                    resolve(false);
+                    resolve("timeout");
                 }
             };
 
