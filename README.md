@@ -120,6 +120,11 @@ if (req.body.SaleToPOIRequest.ExampleRequest) {
 ```
 3. Open a [Pull Request](https://github.com/adyen-examples/adyen-mock-terminal-api/compare) with your changes.
 
+### Run test locally
+Tests run in CI (via [github actions](https://github.com/adyen-examples/adyen-mock-terminal-api/blob/main/.github/workflows/e2e.yml)) when you open a PR.
+
+To run test locally, first install playwright using `npx playwright install`. Then execute tests with `npx playwright test --workers 1` while the application is running.
+
 
 ## License
 

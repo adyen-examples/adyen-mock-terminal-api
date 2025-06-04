@@ -13,5 +13,14 @@ module.exports = {
         await page.getByRole('button', { name: '4' }).click();
         await page.getByRole('button', { name: '✓' }).click();
         await expect(page.locator('text=/Enter your pin/')).toBeHidden();
+    },
+
+    /**
+     * Utility function to press the cancel button on the given page.
+     */
+    async pressCancel(page) {
+        await expect(page.locator('text=/Enter your pin/')).toBeVisible();
+        await page.getByRole('button', { name: 'X' }).click();
+        await expect(page.locator('text=/Enter your pin/')).toBeHidden();
     }
 };
