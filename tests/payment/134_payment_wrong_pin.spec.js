@@ -5,7 +5,7 @@ const utilities = require('../utilities');
 test('134 Payment - Wrong Pin', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('').selectOption('134_paymentWrongPin');
+  await page.getByLabel('', { exact: true }).selectOption('134_paymentWrongPin');
 
   await page.getByRole('button', { name: 'Clear' }).click();
   await page.getByRole('button', { name: 'Send' }).click();
