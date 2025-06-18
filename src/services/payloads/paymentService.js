@@ -24,29 +24,39 @@ class PaymentService {
         return request.body.SaleToPOIRequest.PaymentRequest;
     }
 
+    /**
+     * Get the default response `prefix` key that should be returned by the terminal.
+     * @returns {String} - response prefix
+     */
+    getDefaultResponsePrefix(request) {
+        const amount = request.body.SaleToPOIRequest.PaymentRequest.PaymentTransaction.AmountsReq.RequestedAmount;
+        const lastThreeDigits = amount.toString()
+            .replace('.', '')
+            .padStart(3, '0')
+            .slice(-3);
+
+        // Look up error code from payment failure.
+        const paymentFailure = paymentFailureMap[lastThreeDigits];
+
+        if (paymentFailure) {
+            return paymentFailure;
+        }
+
+        return "payment";
+    }
+
     async getResponse(request) {
         // Set terminal to busy and start handling logic.
         userInteractionService.setState(STATES.BUSY);
+        // Pre-select default response based on request content
+        userInteractionService.setResponsePrefix(this.getDefaultResponsePrefix(request));
 
         // Wait for the confirm button if a payment request is sent.
         const isPinEntered = await this.getPinResultAsync();
         userInteractionService.setState(STATES.READY);
 
         if (isPinEntered) {
-            const amount = request.body.SaleToPOIRequest.PaymentRequest.PaymentTransaction.AmountsReq.RequestedAmount;
-            const lastThreeDigits = amount.toString()
-                .replace('.', '')
-                .padStart(3, '0')
-                .slice(-3);
-
-            // Look up error code from payment failure.
-            const paymentFailure = paymentFailureMap[lastThreeDigits];
-
-            if (paymentFailure) {
-                return paymentFailure;
-            }
-
-            return "payment";
+            return userInteractionService.getResponsePrefix();
         }
 
         return {};

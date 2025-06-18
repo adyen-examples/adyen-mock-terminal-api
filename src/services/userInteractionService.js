@@ -11,6 +11,7 @@ class UserInteractionService {
             this.lastRequest = {};
             this.lastResponse = {};
             this.state = this.STATES.READY;
+            this.responsePrefix = "payment";
 
             this.pin = "";
             this.isConfirmed = false;
@@ -41,6 +42,22 @@ class UserInteractionService {
         this.setIsConfirmed(false);
         this.state = state;
         console.info("State changed to: " + state);
+    }
+
+    /**
+     * Get the response of the terminal.
+     * @returns {String} - response prefix
+     */
+    getResponsePrefix() {
+        return this.responsePrefix;
+    }
+
+    /**
+     * Set the state of the terminal.
+     * @param {String} - response prefix
+     */
+    setResponsePrefix(prefix) {
+        this.responsePrefix = prefix;
     }
 
     /**

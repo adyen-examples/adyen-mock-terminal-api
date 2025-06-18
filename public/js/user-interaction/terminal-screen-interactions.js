@@ -109,6 +109,19 @@ function bindAllTerminalButtons() {
     });
 }
 
+async function responsePrefixButtonOnClick() {
+    try {
+        if (!isAllowedToEnterPin()) {
+            return;
+        }
+
+        const dropdown = document.getElementById('response-prefix-dropdown');
+        await sendPostRequest("/user-interaction/response-prefix-button/" + dropdown.value);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 bindAllTerminalButtons();
 
 pollEndpoint('/user-interaction/get-state', updateState);

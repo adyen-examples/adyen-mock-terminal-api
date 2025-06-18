@@ -8,7 +8,8 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     const data = payloadService.getPayloads();
     res.render("index", {
-        keys: Object.keys(data).filter(key => data[key][0] !== null) // Filter out empty requests, e.g. paymentBusy response
+        requests: Object.keys(data).filter(key => data[key][0] !== null), // Filter out empty requests, e.g. paymentBusy response
+        responses: Object.keys(data).filter(key => data[key][1] !== null) // Filter out empty responses
     });
 });
 

@@ -3,7 +3,7 @@
     <div id="trigger-request-dropdown" class="trigger-request-dropdown">
         <label for="request-dropdown"></label>
         <select id="request-dropdown" class="request-dropdown">
-            {{#each keys}}
+            {{#each requests}}
                 {{#if (isEqual this "payment")}}
                     <option value="{{this}}" selected>{{toUpperCase this}} Request</option>
                 {{else}}
@@ -60,6 +60,19 @@
                 <button id="0-button" class="digit-button">0</button>
                 <button id="hashtag-button" class="digit-button">#</button>
             </div>
+        </div>
+        <div>
+            <label for="response-prefix-dropdown">Returned response on PIN enter</label>
+            <select id="response-prefix-dropdown" class="response-dropdown">
+                {{#each responses}}
+                    {{#if (isEqual this "payment")}}
+                        <option value="{{this}}" selected>{{toUpperCase this}} Response</option>
+                    {{else}}
+                        <option value="{{this}}">{{toUpperCase this}} Response</option>
+                    {{/if}}
+                {{/each}}
+            </select>
+            <button id="response-prefix-button" class="button green" onclick="responsePrefixButtonOnClick()">Set</button>
         </div>
     </div>
 </div>

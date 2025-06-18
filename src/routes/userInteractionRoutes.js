@@ -71,6 +71,13 @@ router.post("/cancel-button", async (req, res) => {
     res.status(200).send({});
 });
 
+router.post("/response-prefix-button/:prefix", async (req, res) => {
+    const { prefix } = req.params;
+    userInteractionService.setResponsePrefix(prefix);
+
+    res.status(200).send({});
+});
+
 
 /* Terminal-screen buttons end */
 
