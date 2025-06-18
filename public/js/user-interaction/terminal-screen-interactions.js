@@ -31,16 +31,32 @@ function updateScreenText(text) {
     document.getElementById("screen").textContent = text;
 }
 
+function getResponsePrefixOverrideElement() {
+    return document.getElementById("response-prefix-override");
+}
+
+function enableResponsePrefixOverride(value) {
+    getResponsePrefixOverrideElement().classList.remove("hidden");
+    const dropdown = document.getElementById('response-prefix-dropdown');
+    dropdown.value = value;
+}
+
+function disableResponsePrefixOverride() {
+    getResponsePrefixOverrideElement().classList.add("hidden");
+}
+
 let currentState = "READY";
 
 function updateState(response) {
     if (response.state === "BUSY") { // Pin.
         if (getScreenPinElement().classList.contains("hidden")) {
             enableEnterPinScreen();
+            enableResponsePrefixOverride(response.responsePrefix);
         }
     } else if (response.state === "READY") { // No pin.
         if (!getScreenPinElement().classList.contains("hidden")) {
             disableEnterPinScreen();
+            disableResponsePrefixOverride();
         }
     }
     currentState = response.state;
@@ -109,14 +125,14 @@ function bindAllTerminalButtons() {
     });
 }
 
-async function responsePrefixButtonOnClick() {
+async function responsePrefixSelectOnChange() {
     try {
-        if (!isAllowedToEnterPin()) {
-            return;
-        }
-
+        const confirm = document.getElementById("response-prefix-confirm");
+        confirm.classList.add("hidden");
+        
         const dropdown = document.getElementById('response-prefix-dropdown');
-        await sendPostRequest("/user-interaction/response-prefix-button/" + dropdown.value);
+        await sendPostRequest("/user-interaction/response-prefix-dropdown/" + dropdown.value);
+        confirm.classList.remove("hidden");
     } catch (error) {
         console.error(error);
     }

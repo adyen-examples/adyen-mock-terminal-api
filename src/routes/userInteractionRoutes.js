@@ -6,7 +6,10 @@ const router = express.Router();
 /* Request & response code-blocks screen polling start */
 
 router.get("/get-state", async (req, res) => {
-    res.status(200).send({ state: userInteractionService.getState() });
+    res.status(200).send({
+        state: userInteractionService.getState(),
+        responsePrefix: userInteractionService.getResponsePrefix()
+    });
 });
 
 router.get("/get-last-request", async (_req, res) => {
@@ -71,7 +74,7 @@ router.post("/cancel-button", async (req, res) => {
     res.status(200).send({});
 });
 
-router.post("/response-prefix-button/:prefix", async (req, res) => {
+router.post("/response-prefix-dropdown/:prefix", async (req, res) => {
     const { prefix } = req.params;
     userInteractionService.setResponsePrefix(prefix);
 

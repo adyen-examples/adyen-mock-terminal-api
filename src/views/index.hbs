@@ -61,9 +61,9 @@
                 <button id="hashtag-button" class="digit-button">#</button>
             </div>
         </div>
-        <div>
+        <div id="response-prefix-override" class="response-prefix-override hidden">
             <label for="response-prefix-dropdown">Returned response on PIN enter</label>
-            <select id="response-prefix-dropdown" class="response-dropdown">
+            <select id="response-prefix-dropdown" class="response-prefix-dropdown" onchange="responsePrefixSelectOnChange()">
                 {{#each responses}}
                     {{#if (isEqual this "payment")}}
                         <option value="{{this}}" selected>{{toUpperCase this}} Response</option>
@@ -72,7 +72,7 @@
                     {{/if}}
                 {{/each}}
             </select>
-            <button id="response-prefix-button" class="button green" onclick="responsePrefixButtonOnClick()">Set</button>
+            <span id="response-prefix-confirm" class="response-prefix-confirm">✓</span>
         </div>
     </div>
 </div>

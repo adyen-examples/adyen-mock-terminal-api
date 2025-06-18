@@ -162,6 +162,36 @@ label {
     transform: translateY(2px);
 }
 
+.response-prefix-override {
+    margin-top: 10px;
+}
+
+.response-prefix-override.hidden {
+    display: none;
+}
+
+.response-prefix-dropdown {
+    padding: 8px;
+    border: 1px solid var(--semi-white-color);
+    border-radius: 8px;
+    width: 330px;
+}
+
+.response-prefix-dropdown:focus {
+    outline: none;
+}
+
+.response-prefix-confirm {
+    color: var(--adyen-green-color);
+    font-weight: bold;
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+.response-prefix-confirm.hidden {
+    display: none;
+}
+
 /* Terminal end */
 
 
