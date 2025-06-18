@@ -48,16 +48,16 @@ function disableResponsePrefixOverride() {
 let currentState = "READY";
 
 function updateState(response) {
+    if (response.state === currentState) {
+        return;
+    }
     if (response.state === "BUSY") { // Pin.
-        if (getScreenPinElement().classList.contains("hidden")) {
-            enableEnterPinScreen();
-            enableResponsePrefixOverride(response.responsePrefix);
-        }
-    } else if (response.state === "READY") { // No pin.
-        if (!getScreenPinElement().classList.contains("hidden")) {
-            disableEnterPinScreen();
-            disableResponsePrefixOverride();
-        }
+        enableEnterPinScreen();
+        enableResponsePrefixOverride(response.responsePrefix);
+    } 
+    if (response.state === "READY") { // No pin.
+        disableEnterPinScreen();
+        disableResponsePrefixOverride();
     }
     currentState = response.state;
 }
