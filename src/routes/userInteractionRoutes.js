@@ -64,8 +64,7 @@ router.post("/cancel-button", async (req, res) => {
         return;
     }
     
-    userInteractionService.clearLastRequestAndResponse();
-    userInteractionService.setState(STATES.READY);
+    userInteractionService.setIsCancelled(true);
 
     console.info("Cancelled entering pin.");
     res.status(200).send({});

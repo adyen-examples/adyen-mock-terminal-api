@@ -28,7 +28,7 @@ router.post("/sync", async (req, res) => {
         // Handle abort request.
         if (req.body.SaleToPOIRequest.AbortRequest) {
             userInteractionService.setState(STATES.READY);
-            sendOKResponse(res, "abortPayment");
+            res.status(200).send({});
             return;
         }
 
@@ -69,14 +69,8 @@ router.post("/sync", async (req, res) => {
 
 /**
  * Helper function that returns a 200 response for given `prefix` key.
- * If {} is provided as prefix, we skip the look-up and return {}.
  */
 function sendOKResponse(res, prefix) {
-    if (prefix === {}) {
-        res.status(200).send({})
-        return;
-    }
-    
     const response = payloadService.getResponseByPrefix(prefix);
     userInteractionService.setLastResponse(response);
     res.status(200).send(response);

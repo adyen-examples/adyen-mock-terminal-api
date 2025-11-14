@@ -13,6 +13,7 @@ class UserInteractionService {
             this.state = this.STATES.READY;
 
             this.pin = "";
+            this.isCancelled = false;
             this.isConfirmed = false;
         }
 
@@ -38,6 +39,7 @@ class UserInteractionService {
         }
 
         this.clearPin();
+        this.setIsCancelled(false);
         this.setIsConfirmed(false);
         this.state = state;
         console.info("State changed to: " + state);
@@ -106,6 +108,22 @@ class UserInteractionService {
      */
     clearPin() {
         this.pin = "";
+    }
+
+    /**
+     * Returns true when the red cacenl-button is pressed on the terminal.
+     * @returns {Boolean} - True when the cancel-button has been pressed.
+     */
+    getIsCancelled() {
+        return this.isCancelled;
+    }
+
+    /**
+     * Set to true when to red cancel-button is pressed on the terminal.
+     * @param {Boolean} isCancelled - Set to true when the cancel-button has been pressed.
+     */
+    setIsCancelled(isCancelled) {
+        this.isCancelled = isCancelled;
     }
 
     /**
