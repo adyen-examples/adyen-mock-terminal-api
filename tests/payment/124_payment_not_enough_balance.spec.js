@@ -5,7 +5,7 @@ const utilities = require('../utilities');
 test('124 Payment - Not Enough Balance', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('').selectOption('124_paymentNotEnoughBalance');
+  await page.getByLabel('', { exact: true }).selectOption('124_paymentNotEnoughBalance');
 
   await page.getByRole('button', { name: 'Clear' }).click();
   await page.getByRole('button', { name: 'Send' }).click();

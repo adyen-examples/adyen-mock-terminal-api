@@ -31,17 +31,33 @@ function updateScreenText(text) {
     document.getElementById("screen").textContent = text;
 }
 
+function getResponsePrefixOverrideElement() {
+    return document.getElementById("response-prefix-override");
+}
+
+function enableResponsePrefixOverride(value) {
+    getResponsePrefixOverrideElement().classList.remove("hidden");
+    const dropdown = document.getElementById('response-prefix-dropdown');
+    dropdown.value = value;
+}
+
+function disableResponsePrefixOverride() {
+    getResponsePrefixOverrideElement().classList.add("hidden");
+}
+
 let currentState = "READY";
 
 function updateState(response) {
+    if (response.state === currentState) {
+        return;
+    }
     if (response.state === "BUSY") { // Pin.
-        if (getScreenPinElement().classList.contains("hidden")) {
-            enableEnterPinScreen();
-        }
-    } else if (response.state === "READY") { // No pin.
-        if (!getScreenPinElement().classList.contains("hidden")) {
-            disableEnterPinScreen();
-        }
+        enableEnterPinScreen();
+        enableResponsePrefixOverride(response.responsePrefix);
+    } 
+    if (response.state === "READY") { // No pin.
+        disableEnterPinScreen();
+        disableResponsePrefixOverride();
     }
     currentState = response.state;
 }
@@ -107,6 +123,19 @@ function bindAllTerminalButtons() {
 
         await sendPostRequest("/user-interaction/cancel-button");
     });
+}
+
+async function responsePrefixSelectOnChange() {
+    try {
+        const confirm = document.getElementById("response-prefix-confirm");
+        confirm.classList.add("hidden");
+        
+        const dropdown = document.getElementById('response-prefix-dropdown');
+        await sendPostRequest("/user-interaction/response-prefix-dropdown/" + dropdown.value);
+        confirm.classList.remove("hidden");
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 bindAllTerminalButtons();

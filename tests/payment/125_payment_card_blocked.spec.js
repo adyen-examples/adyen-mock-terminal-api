@@ -5,7 +5,7 @@ const utilities = require('../utilities');
 test('125 Payment - Card Blocked', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('').selectOption('125_paymentCardBlocked');
+  await page.getByLabel('', { exact: true }).selectOption('125_paymentCardBlocked');
 
   await page.getByRole('button', { name: 'Clear' }).click();
   await page.getByRole('button', { name: 'Send' }).click();

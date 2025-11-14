@@ -5,7 +5,7 @@ const utilities = require('../utilities');
 test('126 Payment - Card Expired', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByLabel('').selectOption('126_paymentCardExpired');
+  await page.getByLabel('', { exact: true }).selectOption('126_paymentCardExpired');
 
   await page.getByRole('button', { name: 'Clear' }).click();
   await page.getByRole('button', { name: 'Send' }).click();

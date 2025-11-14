@@ -26,7 +26,7 @@ async function sendPostRequest(url, data) {
     return res.json();
 }
 
-async function pollEndpoint(endpoint, callback, milliseconds = 400) {
+async function pollEndpoint(endpoint, callback, milliseconds = 1000) {
     let pollingInterval;
 
     async function poll() {
